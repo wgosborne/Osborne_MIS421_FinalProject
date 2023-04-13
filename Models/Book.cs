@@ -1,9 +1,11 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
-public class Book
+public class Book //will get filled in with Azure Books data, we can fill these fields w what they give us
 {
 	[Url]
-	public string? HyperLink { get; set; }
+	public string? HyperLink { get; set; } //Link to the book on the site
 	public DateTime? StartDate { get; set; }
 
 	public DateTime? EndDate { get; set; }

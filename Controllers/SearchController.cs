@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _521Final.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace _521Final.Controllers
 {
