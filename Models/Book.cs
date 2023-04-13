@@ -2,9 +2,29 @@
 
 public class Book
 {
+	[Url]
+	public string? HyperLink { get; set; }
+	public DateTime? StartDate { get; set; }
+
+	public DateTime? EndDate { get; set; }
+
+	public int userRating { get; set; }
+
+	public string Title { get; set; }
+
+	public string Author { get; set; }
+
+	public int AvgRating { get; set; }
+
+	public string Genre { get; set; }
+
+	public List<string> Reviews { get; set; } //this may need its own class where we hold the review and who wrote it and the rate then get them here
+
+	public string MyReview { get; set; }
+
+	public List<Book> SimilarBooks { get; set; }
 	public Book()
 	{
-		
 
 	}
 }

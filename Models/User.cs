@@ -14,4 +14,8 @@ public class User
 
 	public DateTime Birthday { get; set; }
 
+	public List<Book> MyBooks { get; set; }
+
+	public List<Book> WishList { get; set; }
+
 }
