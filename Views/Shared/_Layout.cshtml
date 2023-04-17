@@ -47,10 +47,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">My books</a></li>
-        <li><a href="#">Recs</a></li>
-        <li><a href="#">Browse</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="MyBooks">My Books</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="Reccommendations" asp-action="Index">Reccommendations</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="Browse" asp-action="Index">Browse</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
