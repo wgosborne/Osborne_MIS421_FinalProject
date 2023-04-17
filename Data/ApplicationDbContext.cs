@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using _521Final.Models;
 
 namespace _521Final.Data
 {
@@ -9,5 +10,10 @@ namespace _521Final.Data
             : base(options)
         {
         }
+        public DbSet<_521Final.Models.Reccomendation>? Reccomendation { get; set; }
+        public DbSet<Book>? Book { get; set; }
+        public DbSet<_521Final.Models.Genre>? Genre { get; set; }
+        public DbSet<_521Final.Models.GenreBook>? GenreBook { get; set; }
+        public DbSet<_521Final.Models.UserBook>? UserBook { get; set; }
     }
 }
