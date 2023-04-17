@@ -1,35 +1,41 @@
-﻿using RestSharp;
+﻿using OpenAI.Api;
+using OpenAI.Api.V1;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using RestSharp;
 
 namespace _521Final.Models
 {
     public class ChatGPTClient
     {
-        private readonly string _apiKey;
-        private readonly RestClient _client;
+        private const string API_KEY = "YOUR_API_KEY_HERE"; // Replace with your OpenAI API key
 
-        public ChatGPTClient(string apiKey)
+        public static async Task<string> GenerateSummary(string bookName)
         {
-            _apiKey = apiKey;
-            _client = new RestClient("https://api.openai.com/v1/");
+            var client = new OpenAIApi(API_KEY);
+            var completions = await client.Completions.CreateCompletionAsync(
+                engine: Engine.Davinci,
+                prompt: $"Write a summary of {bookName}.",
+                maxTokens: 60,
+                n: 1,
+                stop: new List<string> { "\n" }
+            );
+
+            return completions.Choices[0].Text.Trim();
         }
 
-        public string GetChatResponse(string message)
+        public async Task<string> GenerateSummary(string bookName)
         {
-            //uncomment this out when its time to get the chat GOT going
-            //var request = new RestRequest("engines/davinci-codex/completions", Method.POST);
-            //request.AddHeader("Authorization", $"Bearer {_apiKey}");
-            //request.AddJsonBody(new
-            //{
-            //    prompt = message,
-            //    max_tokens = 100,
-            //    n = 1,
-            //    stop = "\n",
-            //    temperature = 0.7
-            //});
+            var client = new OpenAIApi(API_KEY_HERE);
+            var completions = await client.Completions.CreateCompletionAsync(
+                engine: Engine.Davinci,
+                prompt: $"Write a summary of {bookName}.",
+                maxTokens: 60,
+                n: 1,
+                stop: new List<string> { "\n" }
+            );
 
-            //var response = _client.Execute<dynamic>(request);
-            //return response.Data.choices[0].text;
-            return "";
+            return completions.Choices[0].Text.Trim();
         }
     }
 }
