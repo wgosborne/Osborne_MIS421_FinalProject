@@ -15,19 +15,20 @@ namespace _521Final.Models
 
         public string GetChatResponse(string message)
         {
-            var request = new RestRequest("engines/davinci-codex/completions", Method.POST);
-            request.AddHeader("Authorization", $"Bearer {_apiKey}");
-            request.AddJsonBody(new
-            {
-                prompt = message,
-                max_tokens = 100,
-                n = 1,
-                stop = "\n",
-                temperature = 0.7
-            });
+            //var request = new RestRequest("engines/davinci-codex/completions", Method.POST);
+            //request.AddHeader("Authorization", $"Bearer {_apiKey}");
+            //request.AddJsonBody(new
+            //{
+            //    prompt = message,
+            //    max_tokens = 100,
+            //    n = 1,
+            //    stop = "\n",
+            //    temperature = 0.7
+            //});
 
-            var response = _client.Execute<dynamic>(request);
-            return response.Data.choices[0].text;
+            //var response = _client.Execute<dynamic>(request);
+            //return response.Data.choices[0].text;
+            return "";
         }
     }
 }

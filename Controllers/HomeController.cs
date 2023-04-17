@@ -11,7 +11,7 @@ namespace _521Final.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _chatGPTClient = new ChatGPTClient("your-api-key-here");
+            //_chatGPTClient = new ChatGPTClient("your-api-key-here");
         }
 
         public IActionResult Index()
