@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 public class User
 {
@@ -16,6 +18,6 @@ public class User
 
 	public List<Book> MyBooks { get; set; }
 
-	public List<Book> WishList { get; set; }
+	public List<Book> WishList { get; set; } // or we can just do one called Shelf
 
 }

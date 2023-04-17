@@ -6,7 +6,7 @@ public class Book //will get filled in with Azure Books data, we can fill these 
 {
 	public int Id { get; set; }
 	[Url]
-	public string? HyperLink { get; set; } //Link to the book on the site
+	public string? HyperLink { get; set; } //Link to the book on the site, so they can click on it
 	public DateTime? StartDate { get; set; }
 
 	public DateTime? EndDate { get; set; }
@@ -29,5 +29,4 @@ public class Book //will get filled in with Azure Books data, we can fill these 
 	public Book()
 	{
 
-	}
 }

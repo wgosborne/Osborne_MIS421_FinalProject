@@ -11,6 +11,7 @@ namespace _521Final.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _chatGPTClient = new ChatGPTClient("your-api-key-here");
         }
 
         public IActionResult Index()
@@ -27,6 +28,16 @@ namespace _521Final.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //ChatGPT functionality, we need to add the api key to the constructor at the top
+        private readonly ChatGPTClient _chatGPTClient;
+
+        [HttpPost]
+        public ActionResult GetChatResponse(string message)
+        {
+            var response = _chatGPTClient.GetChatResponse(message);
+            return Content(response);
         }
     }
 }
