@@ -40,6 +40,7 @@
   </div>
 </div>
 
+@*we can put this in the header if we want it at the actual top*@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -64,16 +65,18 @@
   </div>
 </nav>
 
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+</div>
+
 <footer class="container-fluid text-center">
   <p>Online Store Copyright</p>  
   <form class="form-inline">Get deals:
     <input type="email" class="form-control" size="50" placeholder="Email Address">
     <button type="button" class="btn btn-danger">Sign Up</button>
   </form>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-        </div>
+        
 </footer>
     
 </body>
