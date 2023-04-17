@@ -15,6 +15,7 @@ namespace _521Final.Models
 
         public string GetChatResponse(string message)
         {
+            //uncomment this out when its time to get the chat GOT going
             //var request = new RestRequest("engines/davinci-codex/completions", Method.POST);
             //request.AddHeader("Authorization", $"Bearer {_apiKey}");
             //request.AddJsonBody(new
