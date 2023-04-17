@@ -1,7 +1,8 @@
-﻿@model IEnumerable<_521Final.Models.UserBook>
-
+﻿@*referencing My Books and their recommended books*@
+@model IEnumerable<_521Final.Models.UserBook>
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
 }
 
 <h1>Index</h1>
@@ -27,3 +28,35 @@
 }
     </tbody>
 </table>
+
+//<script type="text/javascript" src="js\MyBooks.js""></script>
+
+<div class="carousel-container">
+    <div class="book">
+        <!-- book content goes here -->
+        Q
+    </div>
+    <div class="book">
+        <!-- book content goes here -->
+        Q
+    </div>
+    <div class="book">
+        <!-- book content goes here -->
+        Q
+    </div>
+    <div class="book">
+        <!-- book content goes here -->
+        Q
+    </div>
+    <div class="book">
+        <!-- book content goes here -->
+        Q
+    </div>
+    <div class="book">
+        <!-- book content goes here -->
+        Q
+    </div>
+    <!-- add more book divs as needed -->
+</div>
+
+<button class="next-button">Next</button>

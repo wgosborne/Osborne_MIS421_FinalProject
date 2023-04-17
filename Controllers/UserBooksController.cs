@@ -22,9 +22,9 @@ namespace _521Final.Controllers
         // GET: UserBooks
         public async Task<IActionResult> Index()
         {
-              return _context.UserBook != null ? 
-                          View(await _context.UserBook.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
+            //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
+            //return View(await applicationDbContext.ToListAsync()); change this for UserBook later
+            return View();
         }
 
         // GET: UserBooks/Details/5
