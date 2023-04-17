@@ -7,3 +7,22 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@*chat GPT stuff from mr GPT himself*@
+<div class="row">
+    <div class="col-md-6">
+        <h2>Chat with ChatGPT</h2>
+        <form id="chatForm">
+            <input type="text" id="messageInput" placeholder="Type your message" />
+            <button id="sendButton">Send</button>
+        </form>
+        <ul id="messages"></ul>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#chatForm').submit(function (event) {
+            event.preventDefault();
+            var message = $('#messageInput').val();
+            $.post('/Home/GetChatResponse
