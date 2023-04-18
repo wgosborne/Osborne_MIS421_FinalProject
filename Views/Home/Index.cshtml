@@ -1,8 +1,10 @@
-﻿@{
+﻿<!DOCTYPE html>
+<html lang="en">
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
 }
-
+<script src="~/js/Home.js"></script>
 @*<div class="text-center">
     <h1 class="display-4">welcome</h1>
     <p>learn about <a href="https://docs.microsoft.com/aspnet/core">building web apps with asp.net core</a>.</p>
@@ -13,10 +15,10 @@
     <div class="col-md-6">
         <h2>Chat with ChatGPT</h2>
         <form id="chatForm">
-            <input type="text" id="messageInput" placeholder="Type your message" />
-            <button id="sendButton">Send</button>
+            <input type="text" id="BookSummaryInput" placeholder="Enter the name of the book you would like summarized" />
+            <button id="sendButton" onclick="GetBookSummary()">Send</button>
         </form>
-        <ul id="messages"></ul>
+        <div id="BookSummaryArea"></div>
     </div>
 </div>
 <p>
@@ -80,12 +82,3 @@
     </div>
   </div>
 </div><br><br>
-
-<script>
-    $(function () {
-        $('#chatForm').submit(function (event) {
-            event.preventDefault();
-            var message = $('#messageInput').val();
-            $.post('/Home/GetChatResponse
-        }
-    }

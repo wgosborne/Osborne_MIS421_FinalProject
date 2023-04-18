@@ -1,5 +1,11 @@
-﻿using OpenAI.Api;
-using OpenAI.Api.V1;
+﻿
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
+using OpenAI.API;
+using OpenAI.API.Files;
+using OpenAI.API.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RestSharp;
@@ -8,34 +14,23 @@ namespace _521Final.Models
 {
     public class ChatGPTClient
     {
-        private const string API_KEY = "YOUR_API_KEY_HERE"; // Replace with your OpenAI API key
+        private const string API_KEY = "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"; // Replace with your OpenAI API key
 
         public static async Task<string> GenerateSummary(string bookName)
         {
-            var client = new OpenAIApi(API_KEY);
+            var client = new OpenAIAPI(API_KEY);
             var completions = await client.Completions.CreateCompletionAsync(
-                engine: Engine.Davinci,
+                model: Model.DavinciCode,
                 prompt: $"Write a summary of {bookName}.",
-                maxTokens: 60,
-                n: 1,
-                stop: new List<string> { "\n" }
+                max_tokens: 60,
+                temperature: .7,
+                numOutputs: 1,
+                stopSequences: new string[] { "\n" }
             );
 
-            return completions.Choices[0].Text.Trim();
+           return completions.OpenaiVersion[0].ToString();
+           //return completions.Choices[0].Text.Trim();
         }
 
-        public async Task<string> GenerateSummary(string bookName)
-        {
-            var client = new OpenAIApi(API_KEY_HERE);
-            var completions = await client.Completions.CreateCompletionAsync(
-                engine: Engine.Davinci,
-                prompt: $"Write a summary of {bookName}.",
-                maxTokens: 60,
-                n: 1,
-                stop: new List<string> { "\n" }
-            );
-
-            return completions.Choices[0].Text.Trim();
-        }
     }
 }
