@@ -8,7 +8,7 @@ using _521Final.Data;
 
 #nullable disable
 
-namespace _521Final.Data.Migrations
+namespace _521Final.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -112,7 +112,7 @@ namespace _521Final.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AvgRating")
+                    b.Property<int?>("AvgRating")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("BookPhoto")
@@ -122,7 +122,6 @@ namespace _521Final.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Genre")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GenreId")
@@ -132,7 +131,6 @@ namespace _521Final.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MyReview")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartDate")
@@ -142,20 +140,10 @@ namespace _521Final.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("userRating")
+                    b.Property<int?>("userRating")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Book");
                 });
@@ -424,17 +412,6 @@ namespace _521Final.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Book", b =>
-                {
-                    b.HasOne("User", null)
-                        .WithMany("MyBooks")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("User", null)
-                        .WithMany("WishList")
-                        .HasForeignKey("UserId1");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -484,13 +461,6 @@ namespace _521Final.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("User", b =>
-                {
-                    b.Navigation("MyBooks");
-
-                    b.Navigation("WishList");
                 });
 #pragma warning restore 612, 618
         }

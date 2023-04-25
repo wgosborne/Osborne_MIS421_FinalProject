@@ -65,7 +65,7 @@ namespace _521Final.Controllers
         public IActionResult Create()
         {
             // added the line below, may need to delete
-            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id");
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id");
             return View();
         }
 
@@ -88,7 +88,7 @@ namespace _521Final.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Title", book.GenreId);
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Title", book.GenreId);
             return View(book);
         }
 
@@ -105,7 +105,7 @@ namespace _521Final.Controllers
             {
                 return NotFound();
             }
-            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
             return View(book);
         }
 
@@ -141,7 +141,7 @@ namespace _521Final.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
             return View(book);
         }
 

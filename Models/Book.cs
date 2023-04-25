@@ -25,8 +25,12 @@ public class Book //will get filled in with Azure Books data, we can fill these 
 
 	public string? MyReview { get; set; }
 
-    public int? GenreId { get; set; }
     public byte[]? BookPhoto { get; set; }
+
+    [ForeignKey("Genre")]
+    public int? GenreId { get; set; }
+
+
     /*public List<Book> SimilarBooks { get; set; }*/
     public Book()
 	{

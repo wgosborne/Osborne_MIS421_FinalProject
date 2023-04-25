@@ -9,11 +9,11 @@ using _521Final.Data;
 
 #nullable disable
 
-namespace _521Final.Data.Migrations
+namespace _521Final.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230417004111_DatabaseUpdate(need to delete Reccomendaton) ")]
-    partial class DatabaseUpdateneedtodeleteReccomendaton
+    [Migration("20230425171804_hopefullyFresh")]
+    partial class hopefullyFresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,12 @@ namespace _521Final.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Genre");
@@ -39,13 +45,23 @@ namespace _521Final.Data.Migrations
 
             modelBuilder.Entity("_521Final.Models.GenreBook", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GenreBookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenreBookId"), 1L, 1);
 
-                    b.HasKey("Id");
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GenreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GenreBookId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("GenreBook");
                 });
@@ -65,13 +81,23 @@ namespace _521Final.Data.Migrations
 
             modelBuilder.Entity("_521Final.Models.UserBook", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserBookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserBookId"), 1L, 1);
 
-                    b.HasKey("Id");
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserBookId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserBook");
                 });
@@ -88,21 +114,25 @@ namespace _521Final.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AvgRating")
+                    b.Property<int?>("AvgRating")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("BookPhoto")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Genre")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<string>("HyperLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MyReview")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartDate")
@@ -112,7 +142,7 @@ namespace _521Final.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userRating")
+                    b.Property<int?>("userRating")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -320,6 +350,68 @@ namespace _521Final.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("_521Final.Models.GenreBook", b =>
+                {
+                    b.HasOne("Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("_521Final.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId");
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("_521Final.Models.UserBook", b =>
+                {
+                    b.HasOne("Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
