@@ -10,87 +10,87 @@ using _521Final.Models;
 
 namespace _521Final.Controllers
 {
-    public class GenreBooksController : Controller
+    public class ReccomendationsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public GenreBooksController(ApplicationDbContext context)
+        public ReccomendationsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: GenreBooks
+        // GET: Reccomendations
         public async Task<IActionResult> Index()
         {
-              return _context.GenreBook != null ? 
-                          View(await _context.GenreBook.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.GenreBook'  is null.");
+              return _context.Reccomendation != null ? 
+                          View(await _context.Reccomendation.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Reccomendation'  is null.");
         }
 
-        // GET: GenreBooks/Details/5
+        // GET: Reccomendations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.GenreBook == null)
+            if (id == null || _context.Reccomendation == null)
             {
                 return NotFound();
             }
 
-            var genreBook = await _context.GenreBook
-                .FirstOrDefaultAsync(m => m.GenreBookId == id);
-            if (genreBook == null)
+            var reccomendation = await _context.Reccomendation
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (reccomendation == null)
             {
                 return NotFound();
             }
 
-            return View(genreBook);
+            return View(reccomendation);
         }
 
-        // GET: GenreBooks/Create
+        // GET: Reccomendations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: GenreBooks/Create
+        // POST: Reccomendations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] GenreBook genreBook)
+        public async Task<IActionResult> Create([Bind("Id")] Reccomendation reccomendation)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(genreBook);
+                _context.Add(reccomendation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(genreBook);
+            return View(reccomendation);
         }
 
-        // GET: GenreBooks/Edit/5
+        // GET: Reccomendations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.GenreBook == null)
+            if (id == null || _context.Reccomendation == null)
             {
                 return NotFound();
             }
 
-            var genreBook = await _context.GenreBook.FindAsync(id);
-            if (genreBook == null)
+            var reccomendation = await _context.Reccomendation.FindAsync(id);
+            if (reccomendation == null)
             {
                 return NotFound();
             }
-            return View(genreBook);
+            return View(reccomendation);
         }
 
-        // POST: GenreBooks/Edit/5
+        // POST: Reccomendations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] GenreBook genreBook)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Reccomendation reccomendation)
         {
-            if (id != genreBook.GenreBookId)
+            if (id != reccomendation.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace _521Final.Controllers
             {
                 try
                 {
-                    _context.Update(genreBook);
+                    _context.Update(reccomendation);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GenreBookExists(genreBook.GenreBookId))
+                    if (!ReccomendationExists(reccomendation.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace _521Final.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(genreBook);
+            return View(reccomendation);
         }
 
-        // GET: GenreBooks/Delete/5
+        // GET: Reccomendations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.GenreBook == null)
+            if (id == null || _context.Reccomendation == null)
             {
                 return NotFound();
             }
 
-            var genreBook = await _context.GenreBook
-                .FirstOrDefaultAsync(m => m.GenreBookId == id);
-            if (genreBook == null)
+            var reccomendation = await _context.Reccomendation
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (reccomendation == null)
             {
                 return NotFound();
             }
 
-            return View(genreBook);
+            return View(reccomendation);
         }
 
-        // POST: GenreBooks/Delete/5
+        // POST: Reccomendations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.GenreBook == null)
+            if (_context.Reccomendation == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.GenreBook'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Reccomendation'  is null.");
             }
-            var genreBook = await _context.GenreBook.FindAsync(id);
-            if (genreBook != null)
+            var reccomendation = await _context.Reccomendation.FindAsync(id);
+            if (reccomendation != null)
             {
-                _context.GenreBook.Remove(genreBook);
+                _context.Reccomendation.Remove(reccomendation);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GenreBookExists(int id)
+        private bool ReccomendationExists(int id)
         {
-          return (_context.GenreBook?.Any(e => e.GenreBookId == id)).GetValueOrDefault();
+          return (_context.Reccomendation?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

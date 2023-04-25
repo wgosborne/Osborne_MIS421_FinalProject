@@ -36,7 +36,7 @@ namespace _521Final.Controllers
             }
 
             var userBook = await _context.UserBook
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.UserBookId == id);
             if (userBook == null)
             {
                 return NotFound();
@@ -90,7 +90,7 @@ namespace _521Final.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id")] UserBook userBook)
         {
-            if (id != userBook.Id)
+            if (id != userBook.UserBookId)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace _521Final.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserBookExists(userBook.Id))
+                    if (!UserBookExists(userBook.UserBookId))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace _521Final.Controllers
             }
 
             var userBook = await _context.UserBook
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.UserBookId == id);
             if (userBook == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace _521Final.Controllers
 
         private bool UserBookExists(int id)
         {
-          return (_context.UserBook?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.UserBook?.Any(e => e.UserBookId == id)).GetValueOrDefault();
         }
     }
 }
