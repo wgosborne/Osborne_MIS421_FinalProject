@@ -1,4 +1,4 @@
-﻿@model _521Final.Models.UserBook
+﻿@model _521Final.Models.Reccomendation
 
 @{
     ViewData["Title"] = "Details";
@@ -7,12 +7,12 @@
 <h1>Details</h1>
 
 <div>
-    <h4>UserBook</h4>
+    <h4>Reccomendation</h4>
     <hr />
     <dl class="row">
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.UserBookId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

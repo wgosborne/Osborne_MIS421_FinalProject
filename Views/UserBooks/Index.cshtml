@@ -8,7 +8,31 @@
 
 <h1>My Books</h1>
 
-<div class="carousel-container" style="">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+//<script type="text/javascript" src="js\MyBooks.js""></script>
+
+<div class="carousel-container">
     <div class="book">
         <!-- book content goes here -->
         Q

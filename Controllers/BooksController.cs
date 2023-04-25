@@ -18,12 +18,26 @@ namespace _521Final.Controllers
             _context = context;
         }
 
+        //Adding the book photo
+        public async Task<IActionResult> GetBookPhoto(int id)
+        {
+            var books = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);
+            if (books == null)
+            {
+                return NotFound();
+            }
+            var imageData = books.BookPhoto;
+            return File(imageData, "image/jpg");
+        }
+
         // GET: Books
         public async Task<IActionResult> Index()
         {
-              return _context.Book != null ? 
-                          View(await _context.Book.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Book'  is null.");
+            /*var applicationDbContext = _context.Book.Include(a => a.Genre);
+            return View(await applicationDbContext.ToListAsync());*/
+            return _context.Book != null ?
+                        View(await _context.Book.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Book'  is null.");
         }
 
         // GET: Books/Details/5
@@ -35,11 +49,14 @@ namespace _521Final.Controllers
             }
 
             var book = await _context.Book
+                //.Include(a => a.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
                 return NotFound();
             }
+
+            //this is where the twitter and VM classes were added. 
 
             return View(book);
         }
@@ -47,6 +64,8 @@ namespace _521Final.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
+            // added the line below, may need to delete
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id");
             return View();
         }
 
@@ -55,14 +74,21 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,StartDate,EndDate,userRating,Title,Author,AvgRating,Genre,MyReview")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,StartDate,EndDate,userRating,Title,Author,AvgRating,Genre,MyReview")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
             {
+                if (BookPhoto != null && BookPhoto.Length > 0)
+                {
+                    var memoryStream = new MemoryStream();
+                    await BookPhoto.CopyToAsync(memoryStream);
+                    book.BookPhoto = memoryStream.ToArray();
+                }
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Title", book.GenreId);
             return View(book);
         }
 
@@ -79,6 +105,7 @@ namespace _521Final.Controllers
             {
                 return NotFound();
             }
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
             return View(book);
         }
 
@@ -114,6 +141,7 @@ namespace _521Final.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
             return View(book);
         }
 
@@ -126,6 +154,7 @@ namespace _521Final.Controllers
             }
 
             var book = await _context.Book
+                //.Include(x => x.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
