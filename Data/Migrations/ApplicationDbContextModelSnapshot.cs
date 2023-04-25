@@ -32,7 +32,7 @@ namespace _521Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genre", (string)null);
                 });
 
             modelBuilder.Entity("_521Final.Models.GenreBook", b =>
@@ -45,7 +45,7 @@ namespace _521Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GenreBook");
+                    b.ToTable("GenreBook", (string)null);
                 });
 
             modelBuilder.Entity("_521Final.Models.Reccomendation", b =>
@@ -58,7 +58,7 @@ namespace _521Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reccomendation");
+                    b.ToTable("Reccomendation", (string)null);
                 });
 
             modelBuilder.Entity("_521Final.Models.UserBook", b =>
@@ -71,7 +71,7 @@ namespace _521Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserBook");
+                    b.ToTable("UserBook", (string)null);
                 });
 
             modelBuilder.Entity("Book", b =>
@@ -115,7 +115,7 @@ namespace _521Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Book");
+                    b.ToTable("Book", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
