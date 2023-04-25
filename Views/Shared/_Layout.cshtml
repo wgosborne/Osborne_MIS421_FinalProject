@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Better Reads</title>
+  <title>Book Match</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="~/osborne_assignment3.styles.css" asp-append-version="true" />*@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="~/css/site.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
@@ -35,11 +36,12 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-    <h1>Better Reads</h1>      
-    <p>Good reading, but better</p>
+    <h1>Book Match</h1>      
+    <p>Find your perfect match</p>
   </div>
 </div>
 
+@*we can put this in the header if we want it at the actual top*@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -56,6 +58,7 @@
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">My Books</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Browse" asp-action="Index">Browse</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Add Books</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
@@ -64,16 +67,18 @@
   </div>
 </nav>
 
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+</div>
+
 <footer class="container-fluid text-center">
   <p>Online Store Copyright</p>  
   <form class="form-inline">Get deals:
     <input type="email" class="form-control" size="50" placeholder="Email Address">
     <button type="button" class="btn btn-danger">Sign Up</button>
   </form>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-        </div>
+        
 </footer>
     
 </body>

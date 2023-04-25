@@ -4,8 +4,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
 }
+<script type="text/javascript" src="js\MyBooks.js""></script>
 
-<h1>Index</h1>
+<h1>My Books</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -57,6 +58,19 @@
         Q
     </div>
     <!-- add more book divs as needed -->
+    <button class="next-button">Next</button>
 </div>
 
-<button class="next-button">Next</button>
+<div class="Container" id="RecentReadsData" style="">
+    <div class="">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Name of book</div>
+        <div @*onload="RenderBookMetaData()"*@ id="BookMetaData" class="panel-body" style="position: right;">
+            @*Render Book Data Here*@
+
+            @*uncomment out the onload when the books get loaded*@
+            
+        </div>
+        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+    </div>
+</div><br>
