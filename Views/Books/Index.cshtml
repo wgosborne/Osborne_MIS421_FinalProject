@@ -1,15 +1,151 @@
 ﻿@model IEnumerable<Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index"; //home page html, Books Index
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
+    <script src="~/js/ChatGpt.js"></script>
 }
+<head>
+    <script src="~/js/ChatGpt.js"></script>
+</head>
 
-<script> src="~/js/ChatGpt.js"</script>
+<body>
+    <h1>Summary and Create Book/Home Page</h1>
 
-<h1>Index</h1>
+    <input type="text" id="bookNameInput">
+    <button id="submitBook" onclick=getSummaryResponse()>Submit</button>
+
+     <div id="bookSummaryArea"></div>
+
+
+
+
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HyperLink)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userRating)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AvgRating)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MyReview)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HyperLink)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MyReview)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</body>
+
+<script>
+    document.getElementById("submitBook").addEventListener("click", getSummaryResponse);
+
+
+    function getSummaryResponse() {
+    console.log("button clicked")
+    const prompt = (document.getElementById("bookNameInput").textContent).trim();
+    const apikey = "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";
+    const engineid = "davinci-codex";//"davinci:ft-personal-2023-04-02-03-13-22";
+    const maxtokens = 100;
+
+    const requestoptions = {
+        method: "post",
+        headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${apikey}`,
+        },
+        body: json.stringify({
+            prompt: prompt,
+            max_tokens: maxtokens,
+            temperature: 0.5,
+            stop: "\n",
+        }),
+    };
+
+    fetch(
+        `https://api.openai.com/v1/engines/${engineid}/completions`,
+        requestoptions
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            const airesponse = data.choices[0].text;
+            console.log(airesponse);
+            //let bothtml = '<p class="bottext"><span>' + airesponse + "</span></p>";
+            //$("#chatbox").append(bothtml);
+
+            //document.getelementbyid("chat-bar-bottom").scrollintoview(true);
+            $("#bookSummaryArea").innerhtml = '"' + airesponse + '"';
+            
+        })
+
+        .catch((error) => console.error(error));
+    }
+</script>
+
+
  <!-- CHAT BAR BLOCK -->
-    <div class="chat-bar-collapsible">
+ @*   <div class="chat-bar-collapsible">
         <button id="chat-button" type="button" class="collapsible">Chat with us!
             <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
         </button>
@@ -51,83 +187,6 @@
             </div>
         </div>
 
-    </div>
+    </div>*@
 
 
-
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.HyperLink)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.userRating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AvgRating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MyReview)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.HyperLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.userRating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AvgRating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MyReview)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
