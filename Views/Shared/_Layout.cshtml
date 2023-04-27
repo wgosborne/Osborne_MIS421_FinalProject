@@ -57,9 +57,17 @@
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">My Books</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Browse" asp-action="Index">Browse</a></li>
+         <li class="dropdown">
+      <a href="#">Dropdown</a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 2</a></li>
+        <li><a href="#">Item 3</a></li>
+      </ul>
+    </li> 
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Add Books</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Chat Gpt</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
