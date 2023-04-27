@@ -56,7 +56,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Genre genre)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Genre genre)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Genre genre)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Genre genre)
         {
             if (id != genre.Id)
             {
