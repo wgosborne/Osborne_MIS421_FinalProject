@@ -30,43 +30,74 @@ document.getElementById("submitBook").addEventListener("click", getSummaryRespon
 
 function getSummaryResponse() {
     console.log("button clicked")
-    const prompt = (document.getElementById("bookNameInput").textContent).trim();
+    const prompt = 'Please provide a 4 sentence summary of the book' + (document.getElementById("bookNameInput").textContent).trim();
     const apikey = "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";
-    const engineid = "davinci-codex";//"davinci:ft-personal-2023-04-02-03-13-22";
-    const maxtokens = 100;
+    const engineid = "text-davinci-003";//"davinci:ft-personal-2023-04-02-03-13-22";
+    //const maxtokens = 100;
 
-    const requestoptions = {
-        method: "post",
-        headers: {
-            "content-type": "application/json",
-            authorization: `bearer ${apikey}`,
-        },
-        body: json.stringify({
-            prompt: prompt,
-            max_tokens: maxtokens,
-            temperature: 0.5,
-            stop: "\n",
-        }),
-    };
 
-    fetch(
-        `https://api.openai.com/v1/engines/${engineid}/completions`,
-        requestoptions
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            const airesponse = data.choices[0].text;
-            console.log(airesponse);
-            //let bothtml = '<p class="bottext"><span>' + airesponse + "</span></p>";
-            //$("#chatbox").append(bothtml);
+    try {
+        const response = fetch(
+            "https://api.openai.com/v1/engines/" + engineid + "/completions",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${apikey}`,
+                },
+                body: JSON.stringify({
+                    prompt,
+                    max_tokens: 60,
+                    n: 1,
+                    stop: '\n',
+                    temperature: 0.5,
+                }),
+            }
+        );
 
-            //document.getelementbyid("chat-bar-bottom").scrollintoview(true);
-            $("#bookSummaryArea").innerhtml = '"' + airesponse + '"';
+        const data = await response.json();
+        const summary = response.data.choices[0].text.trim();
+        console.log(summary);
+        $("#bookSummaryArea").innerhtml = '"' + summary + '"';
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
+//    const requestoptions = {
+//        method: "post",
+//        headers: {
+//            "content-type": "application/json",
+//            Authorization: "bearer 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",
+//        },
+//        body: JSON.stringify({
+//            prompt: prompt,
+//            max_tokens: maxtokens,
+//            temperature: 0.5,
+//            stop: "\n",
+//        }),
+//    };
+
+//    fetch(
+//        "https://api.openai.com/v1/engines/" +engineid + "/completions",
+//        requestoptions
+//    )
+//        .then((response) => response.json())
+//        .then((data) => {
+//            const airesponse = data.choices[0].text;
+//            console.log(airesponse);
+//            //let bothtml = '<p class="bottext"><span>' + airesponse + "</span></p>";
+//            //$("#chatbox").append(bothtml);
+
+//            //document.getelementbyid("chat-bar-bottom").scrollintoview(true);
+//            $("#bookSummaryArea").innerhtml = '"' + airesponse + '"';
             
-        })
+//        })
 
-        .catch((error) => console.error(error));
-}
+//        .catch((error) => console.error(error));
+//}
 //var coll = document.getElementsByClassName("collapsible");
 
 //for (let i = 0; i < coll.length; i++) {

@@ -21,10 +21,12 @@
 
 
 
+
+
     <p>
         <a asp-action="Create">Create New</a>
     </p>
-    <table class="table">
+  @*  <table class="table">
         <thead>
             <tr>
                 <th>
@@ -95,10 +97,56 @@
             </tr>
         }
         </tbody>
-    </table>
+    </table>*@
+
+<div class="box">
+
+@foreach (var item in Model) { //not working bc we can't create books yet
+    <div class="Container" id="" style="">
+        <div class="">
+          <div class="panel panel-primary">
+            <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title) by @Html.DisplayFor(modelItem => item.Author)</div>
+              <div class="">
+                <label for="dateStartedLabel">Date Started:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.StartDate)</span>
+              </div>
+              <div class="">
+                <label for="dateFinishedLabel"> Date Finished:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.EndDate)</span>
+              </div>
+              <div class="">
+                <label for="userRatingLabel">   Your Rating:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
+              </div>
+              <div class="">
+                <label for="averageRatingLabel">    Average Rating:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
+              </div>
+              <div class="">
+                <label for="similarReadsLabel"> Genre:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
+              </div>
+              <div class="">
+                <label for="userReviewLabel">   Your Review:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.MyReview)</span>
+              </div>
+              <div class="">
+                <label for="userReviewLabel">   Similar Reads:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
+              </div>
+            <div class="panel-footer">
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+          </div>
+        </div>
+    </div><br>
+}
+</div>
 </body>
 
-<script>
+@*<script>
     document.getElementById("submitBook").addEventListener("click", getSummaryResponse);
 
 
@@ -106,28 +154,28 @@
     console.log("button clicked")
     const prompt = (document.getElementById("bookNameInput").textContent).trim();
     const apikey = "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";
-    const engineid = "davinci-codex";//"davinci:ft-personal-2023-04-02-03-13-22";
+    const engineid = "text-davinci-003";//"davinci:ft-personal-2023-04-02-03-13-22";
     const maxtokens = 100;
 
-    const requestoptions = {
+    const requestoptions = JSON.stringify{(
         method: "post",
         headers: {
             "content-type": "application/json",
-            authorization: `bearer ${apikey}`,
+            Authorization: `bearer ${apikey}`,
         },
-        body: json.stringify({
+        body: {
             prompt: prompt,
             max_tokens: maxtokens,
             temperature: 0.5,
             stop: "\n",
-        }),
-    };
+        },
+    )};
 
     fetch(
         `https://api.openai.com/v1/engines/${engineid}/completions`,
         requestoptions
     )
-        .then((response) => response.json())
+    .then((response) => response.json())
         .then((data) => {
             const airesponse = data.choices[0].text;
             console.log(airesponse);
@@ -141,7 +189,7 @@
 
         .catch((error) => console.error(error));
     }
-</script>
+</script>*@
 
 
  <!-- CHAT BAR BLOCK -->

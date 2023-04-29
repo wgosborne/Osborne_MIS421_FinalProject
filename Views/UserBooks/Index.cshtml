@@ -1,5 +1,5 @@
 ﻿@*referencing My Books and their recommended books*@
-@model IEnumerable<_521Final.Models.UserBook>
+@model IEnumerable<Book> //probs gonna change to user books later
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
@@ -34,42 +34,29 @@
 <div class="carousel-container">
     <div class="book">
         <!-- book content goes here -->
-        Q
+        <span id=""></span> 
     </div>
     <div class="book">
         <!-- book content goes here -->
-        Q
+        <span id=""></span>
     </div>
     <div class="book">
         <!-- book content goes here -->
-        Q
+        <span id=""></span>
     </div>
     <div class="book">
         <!-- book content goes here -->
-        Q
+        <span id=""></span>
     </div>
     <div class="book">
         <!-- book content goes here -->
-        Q
+        <span id=""></span>
     </div>
     <div class="book">
         <!-- book content goes here -->
-        Q
+        <span id=""></span>
     </div>
-    <!-- add more book divs as needed -->
+    <!-- ADD FUNCTIONALITY TO NEXT BUTTON -->
     <button class="next-button">Next</button>
 </div>
 
-<div class="Container" id="RecentReadsData" style="">
-    <div class="">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Name of book</div>
-        <div @*onload="RenderBookMetaData()"*@ id="BookMetaData" class="panel-body" style="position: right;">
-            @*Render Book Data Here*@
-
-            @*uncomment out the onload when the books get loaded*@
-            
-        </div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-    </div>
-</div><br>
