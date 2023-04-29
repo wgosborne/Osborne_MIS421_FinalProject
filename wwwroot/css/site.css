@@ -14,25 +14,27 @@ html {
     
 }
 h1 {
-    bottom: auto;
-    height: auto;
-    width: auto;
+    
+    width: 470px;
     background-color: floralwhite;
     border-radius: 5px;
     font-family: 'Dancing Script', cursive;
+    margin-left: 365px;
 }
 h2 {
-    background-color: white;
+    background-color: floralwhite;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3)
 }
 h3 {
     background-color: floralwhite;
+    width: 410px;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     font-family: 'Dancing Script', cursive;
+    margin-left: 400px;
 }
 
 
