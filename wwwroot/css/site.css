@@ -46,6 +46,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  width: 1200px;
 }
 
 .jumbotron {
@@ -69,6 +70,10 @@ body {
         padding: 14px 16px;
         text-decoration: none;
     }
+
+.footer {
+    background-color: saddlebrown;
+}
 
 /* Dropdown Button */
 /*.dropbtn {
