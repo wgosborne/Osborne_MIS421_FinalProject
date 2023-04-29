@@ -11,7 +11,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -40,4 +40,28 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
+
+<div class="box">
+
+ @foreach (var item in Model) { //not working bc we can't create books yet
+    <div class="Container" id="" style="">
+        <div class="row">
+          <div class="col-sm-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">@Html.DisplayFor(modelItem => item.Name)</div>
+              <div class="">
+                <label for="Label"></label>
+                <span id="">@Html.DisplayFor(modelItem => item.Description)</span>
+              </div>
+            <div class="panel-footer">
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div><br>
+}
+</div>
