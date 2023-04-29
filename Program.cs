@@ -36,8 +36,10 @@ namespace _521Final
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //app.UseSession();
+            app.UseCookiePolicy();
 
-            app.UseRouting();
+            //app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
