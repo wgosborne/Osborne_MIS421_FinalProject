@@ -1,7 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+/*a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -11,6 +11,13 @@ a {
   color: #0077cc;
 }
 
+body {
+    margin-bottom: 60px;
+    background-color: transparent;
+    background-image: url("https://images.freeimages.com/images/large-previews/e81/westminster-bridge-and-big-ben-london-uk-1635339.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .btn-primary {
   color: #fff;
@@ -40,10 +47,11 @@ button.accept-policy {
   line-height: inherit;
 }
 
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px;
-}
+}*/
