@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Final.Data;
+using _521Final.Models;
 
 namespace _521Final.Controllers
 {
@@ -38,6 +39,9 @@ namespace _521Final.Controllers
             return _context.Book != null ?
                         View(await _context.Book.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Book'  is null.");
+
+            //var applicationDbContext = _context.GenreBook.Include(m => m.Book).Include(m => m.Genre);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Books/Details/5
@@ -66,6 +70,10 @@ namespace _521Final.Controllers
         {
             // added the line below, may need to delete
             //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id");
+            //ViewData["GenreID"] = new SelectList(_context.Genre, "Id", "Id");
+            ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name");
+            var genre = _context.Genre.Where(g => g.Name == ViewData["Genre"]);
+            ViewData["GenreID"] = genre;
             return View();
         }
 
@@ -73,8 +81,8 @@ namespace _521Final.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-     
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre")] Book book, IFormFile BookPhoto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,GenreId")] Book book) //, IFormFile BookPhoto
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +96,8 @@ namespace _521Final.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Title", book.GenreId);
+            //ViewData["GenreID"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
+            ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name", book.Genre);
             return View(book);
         }
 
