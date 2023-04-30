@@ -156,6 +156,14 @@
                 <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
               </div>*@
               <div class="">
+                 <label for="bookPhotoLabel">    Cover Photo:</label>
+                            <span id="">
+                                @if (item.BookPhoto != null)
+                                {
+                                    <img width="100" height="100" src="@Url.Action("GetActorPhoto", "Actors", new {item.Id})" />
+                                }
+              </div>
+              <div class="">
                 <label for="averageRatingLabel">    Average Rating:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
               </div>

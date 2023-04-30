@@ -74,16 +74,16 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre")] Book book) //, IFormFile BookPhoto
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
             {
-                //if (BookPhoto != null && BookPhoto.Length > 0)
-                //{
-                //    var memoryStream = new MemoryStream();
-                //    await BookPhoto.CopyToAsync(memoryStream);
-                //    book.BookPhoto = memoryStream.ToArray();
-                //}
+                if (BookPhoto != null && BookPhoto.Length > 0)
+                {
+                   var memoryStream = new MemoryStream();
+                   await BookPhoto.CopyToAsync(memoryStream);
+                   book.BookPhoto = memoryStream.ToArray();
+                }
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -114,7 +114,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,BookPhoto")] Book book)
         {
             if (id != book.Id)
             {
