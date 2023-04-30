@@ -24,10 +24,12 @@ namespace _521Final.Controllers
         {
             //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
             //return View(await applicationDbContext.ToListAsync()); change this for UserBook later
-            return _context.UserBook != null ?
-                        View(await _context.UserBook.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
+            //return _context.UserBook != null ?
+            //            View(await _context.UserBook.ToListAsync()) :
+            //            Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
             //return View();
+            var applicationDbContext = _context.UserBook.Include(m => m.Book).Include(m => m.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: UserBooks/Details/5
@@ -51,6 +53,8 @@ namespace _521Final.Controllers
         // GET: UserBooks/Create
         public IActionResult Create()
         {
+            ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title");
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName");
             return View();
         }
 
