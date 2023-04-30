@@ -82,7 +82,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,GenreId")] Book book) //, IFormFile BookPhoto
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book) //, IFormFile BookPhoto
         {
             if (ModelState.IsValid)
             {
