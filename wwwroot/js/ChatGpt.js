@@ -55,7 +55,7 @@ function getSummaryResponse() {
             }
         );
 
-        const data = await response.json();
+        const data = response.json();
         const summary = response.data.choices[0].text.trim();
         console.log(summary);
         $("#bookSummaryArea").innerhtml = '"' + summary + '"';

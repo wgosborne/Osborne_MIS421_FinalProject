@@ -11,7 +11,7 @@ function GetBookSummary() {
         //Console.WriteLine($"Summary of {bookName}: {summary}");
         document.getElementById("BookSummaryArea").innerHTML = "<p " + summary + "</p>";
     }
-    catch (Exception e){
+    catch {
         //Console.WriteLine($"Error: {ex.Message}");
     }
 }

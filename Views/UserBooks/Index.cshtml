@@ -1,5 +1,4 @@
-﻿@*referencing My Books and their recommended books*@
-@model IEnumerable<Book> //probs gonna change to user books later
+﻿@model IEnumerable<_521Final.Models.UserBook> //probs gonna change to user books later
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
@@ -7,6 +6,7 @@
 <script type="text/javascript" src="js\MyBooks.js""></script>
 
 <h1>My Books</h1>
+@*referencing My Books and their recommended books*@
 
 <p>
     <a asp-action="Create">Create New</a>
