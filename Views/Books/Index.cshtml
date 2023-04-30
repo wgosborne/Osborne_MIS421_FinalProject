@@ -1,322 +1,90 @@
-﻿@model IEnumerable<Book>
+﻿@model Book
 
 @{
-    ViewData["Title"] = "Index"; //home page html, Books Index
-    Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
-    <script src="~/js/ChatGpt.js"></script>
-  
+    ViewData["Title"] = "Create";
 }
-<head>
-    <script src="~/js/ChatGpt.js"></script>
-    <link rel="stylesheet" href=~/css/site.css />
-    <style>
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
 
-    .carousel-items {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      transition: transform 0.5s ease-in-out;
-    }
+@*This is for admin adding books on the backend*@
 
-    .carousel-item {
-      flex: 1 0 33.3333%;
-      height: 100%;
-      position: relative;
-    }
+<h1>Create</h1>
 
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .description {
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 10px;
-    }
-  </style>
-</head>
-
-<body>
-    <h1>Summary and Create Book/Home Page</h1>
-
-    <input type="text" id="bookNameInput">
-    <button id="submitBook" onclick=getSummaryResponse()>Submit</button>
-
-     <div id="bookSummaryArea"></div>
-
-
-
-
-
-
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-  @*  <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.HyperLink)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.userRating)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AvgRating)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Genre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MyReview)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HyperLink)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.userRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AvgRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MyReview)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>*@
-
-<div class="box">
-
-@foreach (var item in Model) { //not working bc we can't create books yet
-    <div class="Container" id="" style="">
-        <div class="">
-          <div class="panel panel-primary">
-            <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title)</div>
-              @*<div class="">
-                <label for="dateStartedLabel">Date Started:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.StartDate)</span>
-              </div>
-              <div class="">
-                <label for="dateFinishedLabel"> Date Finished:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.EndDate)</span>
-              </div>
-              <div class="">
-                <label for="userRatingLabel">   Your Rating:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
-              </div>*@
-               <div class="">
-                <label for="authorLabel">    Author:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.Author)</span>
-              </div>
-              <div class="">
-                 <label for="bookPhotoLabel">    Cover Photo:</label>
-                            <span id="">
-                                @if (item.BookPhoto != null)
-                                {
-                                    <img width="100" height="100" src="@Url.Action("GetActorPhoto", "Actors", new {item.Id})" />
-                                }
-              </div>
-              <div class="">
-                <label for="averageRatingLabel">    Average Rating:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
-              </div>
-              <div class="">
-                <label for="similarReadsLabel"> Genre:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
-              </div>
-              @*<div class="">
-                <label for="userReviewLabel">   Your Review:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.MyReview)</span>
-              </div>*@
-              <div class="">
-                <label for="userReviewLabel">   Similar Reads:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
-              </div>
-            <div class="panel-footer">
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HyperLink" class="control-label"></label>
+                <input asp-for="HyperLink" class="form-control" />
+                <span asp-validation-for="HyperLink" class="text-danger"></span>
             </div>
-          </div>
-        </div>
-    </div><br>
-}
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="StartDate" class="control-label"></label>
+            <input asp-for="StartDate" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="EndDate" class="control-label"></label>
+            <input asp-for="EndDate" class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="userRating" class="control-label"></label>
+            <input asp-for="userRating" class="form-control" />
+            <span asp-validation-for="userRating" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Author" class="control-label"></label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvgRating" class="control-label"></label>
+                <input asp-for="AvgRating" class="form-control" />
+                <span asp-validation-for="AvgRating" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="Genre" class="control-label"></label>
+            <input asp-for="Genre" class="form-control" />
+            <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
+            <label asp-for="GenreId" class="control-label">Genre ID</label>
+            <select asp-for="GenreId" class ="form-control" asp-items="ViewBag.GenreID"></select>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label">Genre</label>
+                <select asp-for="Genre" class="form-control" asp-items="ViewBag.Genre"></select>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="MyReview" class="control-label"></label>
+            <input asp-for="MyReview" class="form-control" />
+            <span asp-validation-for="MyReview" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="BookPhoto" class="control-label"></label>
+                <input type="file" id="BookPhoto" name="BookPhoto" class="form-control" />
+                <span asp-validation-for="BookPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
 
-@*<script>
-    document.getElementById("submitBook").addEventListener("click", getSummaryResponse);
-
-
-    function getSummaryResponse() {
-    console.log("button clicked")
-    const prompt = (document.getElementById("bookNameInput").textContent).trim();
-    const apikey = "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";
-    const engineid = "text-davinci-003";//"davinci:ft-personal-2023-04-02-03-13-22";
-    const maxtokens = 100;
-
-    const requestoptions = JSON.stringify{(
-        method: "post",
-        headers: {
-            "content-type": "application/json",
-            Authorization: `bearer ${apikey}`,
-        },
-        body: {
-            prompt: prompt,
-            max_tokens: maxtokens,
-            temperature: 0.5,
-            stop: "\n",
-        },
-    )};
-
-    fetch(
-        `https://api.openai.com/v1/engines/${engineid}/completions`,
-        requestoptions
-    )
-    .then((response) => response.json())
-        .then((data) => {
-            const airesponse = data.choices[0].text;
-            console.log(airesponse);
-            //let bothtml = '<p class="bottext"><span>' + airesponse + "</span></p>";
-            //$("#chatbox").append(bothtml);
-
-            //document.getelementbyid("chat-bar-bottom").scrollintoview(true);
-            $("#bookSummaryArea").innerhtml = '"' + airesponse + '"';
-            
-        })
-
-        .catch((error) => console.error(error));
-    }
-</script>*@
-
-
- <!-- CHAT BAR BLOCK -->
- @*   <div class="chat-bar-collapsible">
-        <button id="chat-button" type="button" class="collapsible">Chat with us!
-            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
-        </button>
-
-        <div class="content">
-            <div class="full-chat-block">
-                <!-- Message Container -->
-                <div class="outer-container">
-                    <div class="chat-container">
-                        <!-- Messages -->
-                        <div id="chatbox">
-                            <h5 id="chat-timestamp"></h5>
-                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-                        </div>
-
-                        <!-- User input box -->
-                        <div class="chat-bar-input-block">
-                            <div id="userInput">
-                                <input id="textInput" class="input-box" type="text" name="msg"
-                                    placeholder="Tap 'Enter' to send a message">
-                                <p></p>
-                            </div>
-
-                            <div class="chat-bar-icons">
-                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart"
-                                    onclick="heartButton()"></i>
-                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
-                                    onclick="sendButton()"></i>
-                            </div>
-                        </div>
-
-                        <div id="chat-bar-bottom">
-                            <p></p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>*@
-
-    <h3>This is the code for the carousel, I am thinking we move this to my books once we get the UserBooks create to work</h3>
-    <div class="carousel-container">
-        <div class="carousel-items">
-        @foreach (var item in Model) {
-            <div class="carousel-item">
-                 <img src="item1.jpg" alt="Item 1"> 
-                 <p class="description">@Html.DisplayFor(modelItem => item.Title) by @Html.DisplayFor(modelItem => item.Author)</p> 
-            </div>
-        }
-        </div>
-    <!-- ADD FUNCTIONALITY TO NEXT BUTTON -->
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
-<button id="next-btn">Next</button>
-<script>
-    const items = document.querySelector('.carousel-items');
-    const nextBtn = document.querySelector('#next-btn');
 
-    let currentItem = 0;
-
-    nextBtn.addEventListener('click', () => {
-      currentItem++;
-      if (currentItem >= items.children.length) {
-        currentItem = 0;
-      }
-      items.style.transform = `translateX(-${currentItem * 33.3333}%)`;
-
-      const prevDesc = document.querySelector('.description.show');
-      const currentDesc = items.children[currentItem].querySelector('.description');
-      prevDesc.classList.remove('show');
-      currentDesc.classList.add('show');
-    });
-  </script>
-  </body>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
