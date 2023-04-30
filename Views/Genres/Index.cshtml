@@ -43,10 +43,9 @@
 </table>*@
 
 <div class="box">
-
- @foreach (var item in Model) { //not working bc we can't create books yet
     <div class="Container" id="" style="">
         <div class="row">
+ @foreach (var item in Model) { //not working bc we can't create books yet
           <div class="col-sm-4">
           <div class="panel panel-primary">
             <div class="panel-heading">@Html.DisplayFor(modelItem => item.Name)</div>
@@ -61,7 +60,8 @@
             </div>
           </div>
           </div>
-        </div>
-        </div><br>
+
 }
+</div>
+</div><br>
 </div>

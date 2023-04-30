@@ -24,7 +24,10 @@ namespace _521Final.Controllers
         {
             //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
             //return View(await applicationDbContext.ToListAsync()); change this for UserBook later
-            return View();
+            return _context.UserBook != null ?
+                        View(await _context.UserBook.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
+            //return View();
         }
 
         // GET: UserBooks/Details/5
@@ -56,7 +59,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] UserBook userBook)
+        public async Task<IActionResult> Create([Bind("Id, StartDate, EndDate, UserRating, UserReview")] UserBook userBook)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +91,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] UserBook userBook)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, StartDate, EndDate, UserRating, UserReview")] UserBook userBook)
         {
             if (id != userBook.UserBookId)
             {

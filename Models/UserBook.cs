@@ -8,13 +8,13 @@ namespace _521Final.Models
 
         //I think we should add these
 
-        //public DateTime StartDate
+        public DateTime? StartDate { get; set; }
 
-        //public DateTime EndDate
+        public DateTime? EndDate { get; set; }
 
-        //public int UserRating (should probably be a double, need to change other things
+        public double? UserRating { get; set; }
 
-        //public string UserReview
+        public string? UserReview { get; set; }
 
         [ForeignKey("User")]
         public int? UserId { get; set; }

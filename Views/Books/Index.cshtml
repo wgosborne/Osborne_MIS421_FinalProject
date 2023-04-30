@@ -7,6 +7,43 @@
 }
 <head>
     <script src="~/js/ChatGpt.js"></script>
+    <style>
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .carousel-items {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      flex: 1 0 33.3333%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .description {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+    }
+  </style>
 </head>
 
 <body>
@@ -106,7 +143,7 @@
         <div class="">
           <div class="panel panel-primary">
             <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title) by @Html.DisplayFor(modelItem => item.Author)</div>
-              <div class="">
+              @*<div class="">
                 <label for="dateStartedLabel">Date Started:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.StartDate)</span>
               </div>
@@ -117,7 +154,7 @@
               <div class="">
                 <label for="userRatingLabel">   Your Rating:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
-              </div>
+              </div>*@
               <div class="">
                 <label for="averageRatingLabel">    Average Rating:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
@@ -126,10 +163,10 @@
                 <label for="similarReadsLabel"> Genre:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
               </div>
-              <div class="">
+              @*<div class="">
                 <label for="userReviewLabel">   Your Review:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.MyReview)</span>
-              </div>
+              </div>*@
               <div class="">
                 <label for="userReviewLabel">   Similar Reads:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
@@ -144,7 +181,6 @@
     </div><br>
 }
 </div>
-</body>
 
 @*<script>
     document.getElementById("submitBook").addEventListener("click", getSummaryResponse);
@@ -237,4 +273,36 @@
 
     </div>*@
 
+    <h3>This is the code for the carousel, I am thinking we move this to my books once we get the UserBooks create to work</h3>
+    <div class="carousel-container">
+        <div class="carousel-items">
+        @foreach (var item in Model) {
+            <div class="carousel-item">
+                 <img src="item1.jpg" alt="Item 1"> 
+                 <p class="description">@Html.DisplayFor(modelItem => item.Title) by @Html.DisplayFor(modelItem => item.Author)</p> 
+            </div>
+        }
+        </div>
+    <!-- ADD FUNCTIONALITY TO NEXT BUTTON -->
+</div>
+<button id="next-btn">Next</button>
+<script>
+    const items = document.querySelector('.carousel-items');
+    const nextBtn = document.querySelector('#next-btn');
 
+    let currentItem = 0;
+
+    nextBtn.addEventListener('click', () => {
+      currentItem++;
+      if (currentItem >= items.children.length) {
+        currentItem = 0;
+      }
+      items.style.transform = `translateX(-${currentItem * 33.3333}%)`;
+
+      const prevDesc = document.querySelector('.description.show');
+      const currentDesc = items.children[currentItem].querySelector('.description');
+      prevDesc.classList.remove('show');
+      currentDesc.classList.add('show');
+    });
+  </script>
+  </body>

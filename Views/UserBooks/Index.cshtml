@@ -1,4 +1,5 @@
-﻿@model IEnumerable<_521Final.Models.UserBook> //probs gonna change to user books later
+﻿@model IEnumerable<_521Final.Models.UserBook>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
@@ -8,10 +9,12 @@
 <h1>My Books</h1>
 @*referencing My Books and their recommended books*@
 
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-@*<table class="table">
+
+<table class="table">
     <thead>
         <tr>
             <th></th>
@@ -28,7 +31,7 @@
         </tr>
 }
     </tbody>
-</table>*@
+</table>
 
 
 <div class="carousel-container">
