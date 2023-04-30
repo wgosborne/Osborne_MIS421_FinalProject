@@ -125,11 +125,3 @@ body {
 /*.show {
     display: block;
 }*/
-
-.description {
-    display: none;
-}
-
-.description.show {
-    display: block;
-}

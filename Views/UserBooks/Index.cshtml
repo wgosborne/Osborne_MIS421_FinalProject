@@ -80,15 +80,18 @@
         <div class="carousel-items">
         @foreach (var item in Model) {
             <div class="carousel-item">
-                 <img src="item1.jpg" alt="Item 1"> 
-                 <p class="description">@Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)</p> 
+                 <img src="@Html.DisplayFor(modelItem => item.Book.BookPhoto)" alt="@Html.DisplayFor(modelItem => item.Book.BookPhoto)"> @*just displays empty box rn*@
+                 <p class="description">
+                     @Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)
+                     <br>My Review: @Html.DisplayFor(modelItem => item.UserReview)
+                     <br>My Rating: @Html.DisplayFor(modelItem => item.UserRating)
+                     </p> 
                  <a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |
                  <a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |
                  <a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
             </div>
         }
         </div>
-    <!-- ADD FUNCTIONALITY TO NEXT BUTTON -->
 </div>
 <button id="next-btn">Next</button>
 <script>

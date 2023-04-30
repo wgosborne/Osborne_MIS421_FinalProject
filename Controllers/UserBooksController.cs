@@ -63,7 +63,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, StartDate, EndDate, UserRating, UserReview")] UserBook userBook)
+        public async Task<IActionResult> Create([Bind("Id, StartDate, EndDate, UserRating, UserReview, UserId, BookId")] UserBook userBook)
         {
             if (ModelState.IsValid)
             {
@@ -71,6 +71,8 @@ namespace _521Final.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.UserId);
             return View(userBook);
         }
 
