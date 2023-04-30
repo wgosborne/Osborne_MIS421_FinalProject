@@ -21,11 +21,13 @@ public class Book //will get filled in with Azure Books data, we can fill these 
 
 	public string? Genre { get; set; }
 
+	public string? Summary { get; set; }
+
 	/*public List<string> Reviews { get; set; }*/ //this may need its own class where we hold the review and who wrote it and the rate then get them here
 
 	//public string? MyReview { get; set; }
 
-    public byte[]? BookPhoto { get; set; }
+	public byte[]? BookPhoto { get; set; }
 
     [ForeignKey("Genre")]
     public int? GenreId { get; set; }

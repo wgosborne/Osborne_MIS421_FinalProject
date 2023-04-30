@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index"; //home page html, Books Index
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
-    <script src="~/js/ChatGpt.js"></script>
+    //<script src="~/js/ChatGpt.js"></script>
   
 }
 <head>
@@ -52,7 +52,7 @@
     <h1>Summary and Create Book/Home Page</h1>
 
     <input type="text" id="bookNameInput">
-    <button id="submitBook" onclick=getSummaryResponse()>Submit</button>
+    <button id="submitBook" onclick="getSummaryResponse()">Submit</button>
 
      <div id="bookSummaryArea"></div>
 
