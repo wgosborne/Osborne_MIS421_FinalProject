@@ -114,7 +114,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,StartDate,EndDate,userRating,Title,Author,AvgRating,Genre,MyReview")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre")] Book book)
         {
             if (id != book.Id)
             {

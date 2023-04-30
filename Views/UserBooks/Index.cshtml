@@ -85,10 +85,8 @@
                      @Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)
                      <br>My Review: @Html.DisplayFor(modelItem => item.UserReview)
                      <br>My Rating: @Html.DisplayFor(modelItem => item.UserRating)
+                     <br><a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |<a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |<a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
                      </p> 
-                 <a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |
-                 <a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |
-                 <a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
             </div>
         }
         </div>
