@@ -4,9 +4,11 @@
     ViewData["Title"] = "Index"; //home page html, Books Index
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
     <script src="~/js/ChatGpt.js"></script>
+  
 }
 <head>
     <script src="~/js/ChatGpt.js"></script>
+    <link rel="stylesheet" href=~/css/site.css />
     <style>
     .carousel-container {
       position: relative;
@@ -142,7 +144,7 @@
     <div class="Container" id="" style="">
         <div class="">
           <div class="panel panel-primary">
-            <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title) by @Html.DisplayFor(modelItem => item.Author)</div>
+            <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title)</div>
               @*<div class="">
                 <label for="dateStartedLabel">Date Started:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.StartDate)</span>
@@ -155,6 +157,10 @@
                 <label for="userRatingLabel">   Your Rating:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
               </div>*@
+               <div class="">
+                <label for="authorLabel">    Author:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.Author)</span>
+              </div>
               <div class="">
                  <label for="bookPhotoLabel">    Cover Photo:</label>
                             <span id="">
