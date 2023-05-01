@@ -1,62 +1,47 @@
 ﻿@model Book
 
+
 @{
     ViewData["Title"] = "Details";
 }
+
 
 <h1>Details</h1>
 
 <div>
     <h4>Book</h4>
     <hr />
+    </div>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HyperLink)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HyperLink)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.userRating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.userRating)
-        </dd>*@
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Author)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Author)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AvgRating)
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Genre)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AvgRating)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AvgRating)
+            </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HyperLink)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AvgRating)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HyperLink)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BookPhoto)
@@ -67,15 +52,13 @@
                 <img width="100" height="100" src="@Url.Action("GetBookPhoto", "BookPhoto", new {Model.BookPhoto})" />
             }
         </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MyReview)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MyReview)
-        </dd>*@
     </dl>
-</div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <br /><hr />
+   <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+
+

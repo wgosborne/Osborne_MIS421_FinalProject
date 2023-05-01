@@ -133,7 +133,7 @@
     </table>*@
 
     <div class="box">
-
+    
         @foreach (var item in Model)
         { //not working bc we can't create books yet
             <div class="Container" id="" style="">
@@ -172,6 +172,15 @@
                             <label for="userReviewLabel">   Similar Reads:</label>
                             <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
                         </div>
+                        @*<div class="">
+                            <label for="bookPhoto">   Cover Photo:</label>
+                            <span id="">
+                                @if (Model.BookPhoto != null)
+                                {
+                                    <img width="100" height="100" src="@Url.Action("GetBookPhoto", "BookPhoto", new {Model.BookPhoto})" />
+                                }
+                            </span>
+                        </div>*@
                         <div class="panel-footer">
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
