@@ -1,7 +1,7 @@
 ﻿//document.getElementById("submitBook").addEventListener("click", getSummaryResponse);
 var currBook = '@Html.Raw(Json.Encode(Model))';
 
-function getSummaryResponse(bookName) {
+function getSummaryResponse(currBook) {
     const apiKey = "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";
     const engineid = "text-davinci-002";
     const requestOptions = {

@@ -166,7 +166,7 @@
                 <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
               </div>
               <div class="">
-                <label for="similarReadsLabel"> Genre:</label>
+                <label for="genreLabel"> Genre:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
               </div>
               @*<div class="">
@@ -174,7 +174,11 @@
                 <span id="">@Html.DisplayFor(modelItem => item.MyReview)</span>
               </div>*@
               <div class="">
-                <label for="userReviewLabel">   Similar Reads:</label>
+                <label for="summaryLabel"> Genre:</label>
+                <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
+              </div>
+              <div class="">
+                <label for="similarReadsLabel">   Similar Reads:</label>
                 <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
               </div>
             <div class="panel-footer">
