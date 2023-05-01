@@ -20,7 +20,7 @@ namespace _521Final.Controllers
         }
 
         //Adding the book photo
-        public async Task<IActionResult> GetBookPhoto(int id)
+        /*public async Task<IActionResult> GetBookPhoto(int id)
         {
             var books = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);
             if (books == null)
@@ -29,7 +29,7 @@ namespace _521Final.Controllers
             }
             var imageData = books.BookPhoto;
             return File(imageData, "image/jpg");
-        }
+        }*/
 
         // GET: Books
         public async Task<IActionResult> Index()
@@ -82,16 +82,16 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book) //, IFormFile BookPhoto
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
             {
-                //if (bookphoto != null && bookphoto.length > 0)
-                //{
-                //    var memorystream = new memorystream();
-                //    await bookphoto.copytoasync(memorystream);
-                //    book.bookphoto = memorystream.toarray();
-                //}
+                if (BookPhoto != null && BookPhoto.Length > 0)
+                {
+                   var memoryStream = new MemoryStream();
+                   await BookPhoto.CopyToAsync(memoryStream);
+                   book.BookPhoto = memoryStream.ToArray();
+                }
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -101,6 +101,16 @@ namespace _521Final.Controllers
             return View(book);
         }
 
+        public async Task<IActionResult> GetBookPhoto(int Id)
+        {
+            var books = await _context.Book.FirstOrDefaultAsync(m => m.Id == Id);
+            if (books == null)
+            {
+                return NotFound();
+            }
+            var imageData = books.BookPhoto;
+            return File(imageData, "image/jpg");
+        }
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -122,8 +132,8 @@ namespace _521Final.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre")] Book book)
+        
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,BookPhoto")] Book book)
         {
             if (id != book.Id)
             {
@@ -175,7 +185,7 @@ namespace _521Final.Controllers
 
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+      
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Book == null)
