@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
 }
-
+<div class="container text-center">
 <h1>All Genres</h1>
-
+</div>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -46,7 +46,7 @@
     <div class="container" id="" style="">
         <div class="row">
  @foreach (var item in Model) { //not working bc we can't create books yet
-          <div class="col-sm-4">
+          <div class="col-sm-11">
           <div class="panel panel-primary">
             <div class="panel-heading">@Html.DisplayFor(modelItem => item.Name)</div>
               <div class="">
