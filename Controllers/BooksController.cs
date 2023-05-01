@@ -82,7 +82,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,GenreId")] Book book) //, IFormFile BookPhoto
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -103,12 +103,12 @@ namespace _521Final.Controllers
 
         public async Task<IActionResult> GetBookPhoto(int Id)
         {
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.Id == Id);
-            if (book == null)
+            var books = await _context.Book.FirstOrDefaultAsync(m => m.Id == Id);
+            if (books == null)
             {
                 return NotFound();
             }
-            var imageData = book.BookPhoto;
+            var imageData = books.BookPhoto;
             return File(imageData, "image/jpg");
         }
         // GET: Books/Edit/5
