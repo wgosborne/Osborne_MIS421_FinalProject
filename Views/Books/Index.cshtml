@@ -1,32 +1,51 @@
-﻿@model Book
+﻿@model IEnumerable<Book>
 
 @{
     ViewData["Title"] = "Index"; //home page html, Books Index
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
-    //<script src="~/js/ChatGpt.js"></script>
-  
+                                              //<script src="~/js/ChatGpt.js"></script>
+
 }
+<head>
+    <script src="~/js/ChatGpt.js"></script>
+    <link rel="stylesheet" href=~/css/site.css />
+    <style>
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
 
-@*This is for admin adding books on the backend*@
+        .carousel-items {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
 
-<h1>Create</h1>
+        .carousel-item {
+            flex: 1 0 33.3333%;
+            height: 100%;
+            position: relative;
+        }
 
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+            .carousel-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
-    .description {
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 10px;
-    }
-  </style>
+        .description {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,132 +54,134 @@
     <input type="text" id="bookNameInput">
     <button id="submitBook" onclick="getSummaryResponse()">Submit</button>
 
-     <div id="bookSummaryArea"></div>
+    <div id="bookSummaryArea"></div>
 
     <p>
         <a asp-action="Create">Create New</a>
     </p>
-  @*  <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.HyperLink)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.userRating)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AvgRating)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Genre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MyReview)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+    @*  <table class="table">
+    <thead>
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.HyperLink)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.StartDate)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.EndDate)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.userRating)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Author)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.AvgRating)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Genre)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.MyReview)
+    </th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
     @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HyperLink)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.userRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AvgRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MyReview)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-        </tbody>
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.HyperLink)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.StartDate)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.EndDate)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.userRating)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Author)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.AvgRating)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Genre)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.MyReview)
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+    </tr>
+    }
+    </tbody>
     </table>*@
 
-<div class="box">
+    <div class="box">
 
-@foreach (var item in Model) { //not working bc we can't create books yet
-    <div class="Container" id="" style="">
-        <div class="">
-          <div class="panel panel-primary">
-            <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title)</div>
-              @*<div class="">
-                <label for="dateStartedLabel">Date Started:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.StartDate)</span>
-              </div>
-              <div class="">
-                <label for="dateFinishedLabel"> Date Finished:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.EndDate)</span>
-              </div>
-              <div class="">
-                <label for="userRatingLabel">   Your Rating:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
-              </div>*@
-               <div class="">
-                <label for="authorLabel">    Author:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.Author)</span>
-              </div>
-              <div class="">
-                <label for="averageRatingLabel">    Average Rating:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
-              </div>
-              <div class="">
-                <label for="similarReadsLabel"> Genre:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
-              </div>
-              @*<div class="">
-                <label for="userReviewLabel">   Your Review:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.MyReview)</span>
-              </div>*@
-              <div class="">
-                <label for="userReviewLabel">   Similar Reads:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
-              </div>
-            <div class="panel-footer">
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        @foreach (var item in Model)
+        { //not working bc we can't create books yet
+            <div class="Container" id="" style="">
+                <div class="">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">@Html.DisplayFor(modelItem => item.Title)</div>
+                        @*<div class="">
+                    <label for="dateStartedLabel">Date Started:</label>
+                    <span id="">@Html.DisplayFor(modelItem => item.StartDate)</span>
+                    </div>
+                    <div class="">
+                    <label for="dateFinishedLabel"> Date Finished:</label>
+                    <span id="">@Html.DisplayFor(modelItem => item.EndDate)</span>
+                    </div>
+                    <div class="">
+                    <label for="userRatingLabel">   Your Rating:</label>
+                    <span id="">@Html.DisplayFor(modelItem => item.userRating)</span>
+                    </div>*@
+                        <div class="">
+                            <label for="authorLabel">    Author:</label>
+                            <span id="">@Html.DisplayFor(modelItem => item.Author)</span>
+                        </div>
+                        <div class="">
+                            <label for="averageRatingLabel">    Average Rating:</label>
+                            <span id="">@Html.DisplayFor(modelItem => item.AvgRating)</span>
+                        </div>
+                        <div class="">
+                            <label for="similarReadsLabel"> Genre:</label>
+                            <span id="">@Html.DisplayFor(modelItem => item.Genre)</span>
+                        </div>
+                        @*<div class="">
+                    <label for="userReviewLabel">   Your Review:</label>
+                    <span id="">@Html.DisplayFor(modelItem => item.MyReview)</span>
+                    </div>*@
+                        <div class="">
+                            <label for="userReviewLabel">   Similar Reads:</label>
+                            <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
+                        </div>
+                        <div class="panel-footer">
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-    </div><br>
-}
-</div>
-</body>
 
+            <br>
+        }
+    </div>
+</body>
