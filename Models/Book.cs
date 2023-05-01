@@ -36,5 +36,6 @@ public class Book //will get filled in with Azure Books data, we can fill these 
     /*public List<Book> SimilarBooks { get; set; }*/
     public Book()
 	{
+		//this.Summary = 
 	}
 }

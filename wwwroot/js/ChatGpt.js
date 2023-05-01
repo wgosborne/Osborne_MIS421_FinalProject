@@ -1,9 +1,10 @@
-﻿//document.getElementById("submitBook").addEventListener("click", getSummaryResponse);
-var currBook = '@Html.Raw(Json.Encode(Model))';
+﻿//document.getElementById("titleInput").addEventListener("click", getSummaryResponse);
+//var currBook = '@Html.Raw(Json.Encode(Model))';
 
-function getSummaryResponse(bookName) {
+function getSummaryResponse() {
     const apiKey = "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";
     const engineid = "text-davinci-002";
+    const bookName = document.getElementById("titleInput").value;
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -24,8 +25,8 @@ function getSummaryResponse(bookName) {
         .then(data => {
             const summary = data.choices[0].text;
             console.log(summary);
-            currBook.Summary = summary
-            //document.getElementById("bookSummaryArea").innerHTML = '<p>' + summary + '</p>';
+            //currBook.Summary = summary
+            document.getElementById("summaryText").textContent =  summary ;
 
 
         })
