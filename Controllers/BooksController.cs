@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Final.Data;
 using _521Final.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _521Final.Controllers
 {
@@ -66,6 +67,7 @@ namespace _521Final.Controllers
         }
 
         // GET: Books/Create
+        [Authorize("User")]
         public IActionResult Create()
         {
             // added the line below, may need to delete
@@ -82,6 +84,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("User")]
         public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
@@ -112,6 +115,8 @@ namespace _521Final.Controllers
             return File(imageData, "image/jpg");
         }
         // GET: Books/Edit/5
+
+        [Authorize("User")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Book == null)
@@ -136,6 +141,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("User")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (id != book.Id)
@@ -176,6 +182,7 @@ namespace _521Final.Controllers
         }
 
         // GET: Books/Delete/5
+        [Authorize("User")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Book == null)

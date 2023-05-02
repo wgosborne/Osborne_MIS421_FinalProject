@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Final.Data;
 using _521Final.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _521Final.Controllers
 {
@@ -19,7 +20,7 @@ namespace _521Final.Controllers
             _context = context;
         }
 
-        // GET: UserBooks
+        [Authorize("User")]
         public async Task<IActionResult> Index()
         {
             //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
@@ -72,7 +73,7 @@ namespace _521Final.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
-            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.UserId);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.User.Id);
             return View(userBook);
         }
 
