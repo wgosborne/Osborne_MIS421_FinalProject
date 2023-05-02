@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 public class Book //will get filled in with Azure Books data, we can fill these fields w what they give us
 {
@@ -38,4 +39,5 @@ public class Book //will get filled in with Azure Books data, we can fill these 
 	{
 		//this.Summary = 
 	}
+
 }
