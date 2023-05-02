@@ -3,83 +3,75 @@
 @{
     ViewData["Title"] = "Delete"; //you can only delete books that arent in a users library. Which makes sense
 }
-
+<div class="container text-center">
 <h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+</div>
 <div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HyperLink)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HyperLink)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.userRating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.userRating)
-        </dd>*@
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AvgRating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AvgRating)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BookPhoto)
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.BookPhoto != null)
-            {
-                <img width="100" height="100" src="@Url.Action("GetBookPhoto", "BookPhoto", new {Model.BookPhoto})" />
-            }
-        </dd>
+    <div class="box">
+        <div class="container" id="" style="">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"></div>
+                        <div class="">
+                            <label for="Label"></label>
 
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MyReview)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MyReview)
-        </dd>*@
-    </dl>
-    
+                            @Html.DisplayNameFor(model => model.HyperLink):
+
+
+                            @Html.DisplayFor(model => model.HyperLink)
+
+                            <br />
+
+                            @Html.DisplayNameFor(model => model.Title):
+
+                            @Html.DisplayFor(model => model.Title)
+
+                            <br />
+
+                            @Html.DisplayNameFor(model => model.Author):
+
+                            @Html.DisplayFor(model => model.Author)
+
+                            <br />
+
+                            @Html.DisplayNameFor(model => model.AvgRating):
+
+                            @Html.DisplayFor(model => model.AvgRating)
+
+                            <br />
+
+                            @Html.DisplayNameFor(model => model.Genre):
+
+                            @Html.DisplayFor(model => model.Genre)
+
+                            <br />
+
+                            @Html.DisplayNameFor(model => model.Summary):
+
+                            @Html.DisplayFor(model => model.Summary)
+
+                            <br />
+
+
+                            @if (Model.BookPhoto != null)
+                            {
+                                <img width="100" height="100" src="@Url.Action("GetBookPhoto", "BookPhoto", new {Model.BookPhoto})" />
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div><br>
+    </div>
+    <div>
+        <h3>Are you sure you want to delete this?</h3>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
+    </div>
 </div>
