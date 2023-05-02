@@ -10,6 +10,5 @@ namespace _521Final.Models
         [Required]
         public string? Name { get; set;}
 
-
     }
 }
