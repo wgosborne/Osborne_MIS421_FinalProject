@@ -125,6 +125,9 @@ namespace _521Final.Controllers
                 return NotFound();
             }
             //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
+            ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name");
+            //var genre = _context.Genre.Where(g => g.Name == ViewData["Genre"]);
+            //ViewData["GenreID"] = genre;
             return View(book);
         }
 
@@ -161,6 +164,7 @@ namespace _521Final.Controllers
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
+            ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name", book.Genre);
             return View(book);
         }
 

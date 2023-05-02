@@ -52,10 +52,6 @@
     <div class="container text-center">
     <h1>Summary and Create Book/Home Page</h1>
     </div>
-    <input type="text" id="bookNameInput">
-    <button id="submitBook" onclick="getSummaryResponse()">Submit</button>
-
-    <div id="bookSummaryArea"></div>
 
     <p>
         <a asp-action="Create">Create New</a>
@@ -173,15 +169,15 @@
                 <span id="">@Html.DisplayFor(modelItem => item.Summary)</span> @*still working on this but just trust me pull this on*@
               </div>
               <div class="">
-                <label for="similarReadsLabel">   Similar Reads:</label>
-                <span id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
+                <label for="similarReadsLabel">   Link:</label>
+                <span style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 80ch;" id="">@Html.DisplayFor(modelItem => item.HyperLink)</span>
               </div>
               <div class="">
                 <label for="similarReadsLabel">   Book Cover:</label>
                 <span id="">
                     @if (item.BookPhoto != null)
                     {
-                    <img width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {item.Id})" />
+                    <img style= "object-fit: contain;" width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {item.Id})" />
                     }
                 </span>
               </div>
