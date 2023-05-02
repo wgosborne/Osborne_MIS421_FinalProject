@@ -126,8 +126,8 @@ namespace _521Final.Controllers
             }
             //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
             ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name");
-            //var genre = _context.Genre.Where(g => g.Name == ViewData["Genre"]);
-            //ViewData["GenreID"] = genre;
+            var genre = _context.Genre.Where(g => g.Name == ViewData["Genre"]);
+            ViewData["GenreID"] = genre;
             return View(book);
         }
 
@@ -135,8 +135,8 @@ namespace _521Final.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,BookPhoto")] Book book, IFormFile BookPhoto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (id != book.Id)
             {
