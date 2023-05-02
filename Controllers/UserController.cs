@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using _521Final.Data;
+using _521Final.Data.Repository.IRepository;
+using _521Final.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using _521Final.Data;
+using System.Security.Claims;
 
 namespace _521Final.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ILogger<UserController> _logger;
         private readonly ApplicationDbContext _context;
-
-        public UserController(ILogger<UserController> logger, ApplicationDbContext context)
+        
+        public UserController(ApplicationDbContext context)
         {
-            _logger = logger;
             _context = context;
         }
-
+    
+        [Authorize("Admin")]
         public IActionResult Index()
         {
-            return View();
+            var users = _context.Users.ToList();
+            var applicationUsers = users.Select(u => new ApplicationUser { Id = u.Id, UserName = u.UserName, Email = u.Email }).ToList();
+            return View(applicationUsers);
         }
 
         public IActionResult Create()
