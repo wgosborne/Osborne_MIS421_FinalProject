@@ -7,9 +7,9 @@
 }
 
 
-
-<h1>Users</h1>
-
+<div class="container text-center">
+<h2>Users</h2>
+</div>
 
 
 @if (Model.Any())
@@ -19,6 +19,7 @@
             <tr>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,11 +29,24 @@
                 <tr>
                     <td>@Html.DisplayFor(modelItem => user.UserName)</td>
                     <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                    <td>@Html.DisplayFor(ModelItem => user.Role)</td>
                     <td>
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-secondary" href="@Url.Action("Details", "User", new { id = user.Id })">Details</a>
-                            <a class="btn btn-secondary" href="@Url.Action("Edit", "User", new { id = user.Id })">Edit</a>
-                        </div>
+                    <form asp-controller="User" asp-action="UpdateRole" method="post">
+                    <input type="hidden" name="userId" value="@user.Id" />
+                    <select name="roleName">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    @if (user.Role == "User")
+                        {
+                            <script>document.querySelector('select[name="roleName"] option[value="User"]').setAttribute('selected', 'selected');</script>
+                        }
+                    else if (user.Role == "Admin")
+                    {
+                       <script>document.querySelector('select[name="roleName"] option[value="Admin"]').setAttribute('selected', 'selected');</script>
+                    }
+                    <button type="submit">Update</button>
+                    </form>
                     </td>
                 </tr>
             }

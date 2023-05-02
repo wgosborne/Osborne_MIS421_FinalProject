@@ -16,6 +16,9 @@ namespace _521Final
             {
                 options.AddPolicy("Admin", policy =>
                 policy.RequireRole("Admin"));
+
+                options.AddPolicy("User", policy =>
+                policy.RequireRole("User"));
             });
 
             //just add

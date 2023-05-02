@@ -17,5 +17,6 @@ namespace _521Final.Data
         public DbSet<_521Final.Models.UserBook>? UserBook { get; set; }
         public DbSet<User>? User { get; set; }
         public DbSet<ApplicationUser>? ApplicationUser { get; set; }
+
     }
 }
