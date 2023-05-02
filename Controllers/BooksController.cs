@@ -136,7 +136,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,BookPhoto")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,BookPhoto")] Book book, IFormFile BookPhoto)
         {
             if (id != book.Id)
             {
@@ -147,6 +147,12 @@ namespace _521Final.Controllers
             {
                 try
                 {
+                    if (BookPhoto != null && BookPhoto.Length > 0)
+                    {
+                        var memoryStream = new MemoryStream();
+                        await BookPhoto.CopyToAsync(memoryStream);
+                        book.BookPhoto = memoryStream.ToArray();
+                    }
                     _context.Update(book);
                     await _context.SaveChangesAsync();
                 }
@@ -162,6 +168,7 @@ namespace _521Final.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+
             }
             //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
             ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name", book.Genre);
