@@ -48,6 +48,8 @@ namespace _521Final.Controllers
         // GET: GenreBooks/Create
         public IActionResult Create()
         {
+            ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title");
+            ViewData["GenreID"] = new SelectList(_context.Genre, "Id", "Name");
             return View();
         }
 
@@ -64,6 +66,8 @@ namespace _521Final.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title", genreBook.BookId);
+            ViewData["GenreID"] = new SelectList(_context.User, "Id", "Name", genreBook.GenreId);
             return View(genreBook);
         }
 

@@ -1,16 +1,63 @@
-﻿@*referencing My Books and their recommended books*@
-@model IEnumerable<_521Final.Models.UserBook>
+﻿@model IEnumerable<_521Final.Models.UserBook>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index"; //UserBooks page
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
 }
-<script type="text/javascript" src="js\MyBooks.js""></script>
+@*<script type="text/javascript" src="js\MyBooks.js""></script>*@
+<head>
+    <script src="~/js/ChatGpt.js"></script>
+    <style>
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
 
+    .carousel-items {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      flex: 1 0 33.3333%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .description {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+    }
+  </style>
+</head>
+
+
+<body>
+    <div class="container text-center">
 <h1>My Books</h1>
+</div>
+@*referencing My Books and their recommended books*@
+
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 @*<table class="table">
     <thead>
         <tr>
@@ -31,45 +78,39 @@
 </table>*@
 
 
-<div class="carousel-container">
-    <div class="book">
-        <!-- book content goes here -->
-        Q
-    </div>
-    <div class="book">
-        <!-- book content goes here -->
-        Q
-    </div>
-    <div class="book">
-        <!-- book content goes here -->
-        Q
-    </div>
-    <div class="book">
-        <!-- book content goes here -->
-        Q
-    </div>
-    <div class="book">
-        <!-- book content goes here -->
-        Q
-    </div>
-    <div class="book">
-        <!-- book content goes here -->
-        Q
-    </div>
-    <!-- add more book divs as needed -->
-    <button class="next-button">Next</button>
-</div>
-
-<div class="Container" id="RecentReadsData" style="">
-    <div class="">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Name of book</div>
-        <div @*onload="RenderBookMetaData()"*@ id="BookMetaData" class="panel-body" style="position: right;">
-            @*Render Book Data Here*@
-
-            @*uncomment out the onload when the books get loaded*@
-            
+    <div class="carousel-container">
+        <div class="carousel-items">
+        @foreach (var item in Model) {
+            <div class="carousel-item">
+                 <img src="@Html.DisplayFor(modelItem => item.Book.BookPhoto)" alt="@Html.DisplayFor(modelItem => item.Book.BookPhoto)"> @*just displays empty box rn*@
+                 <p class="description">
+                     @Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)
+                     <br>My Review: @Html.DisplayFor(modelItem => item.UserReview)
+                     <br>My Rating: @Html.DisplayFor(modelItem => item.UserRating)
+                     <br><a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |<a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |<a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
+                     </p> 
+            </div>
+        }
         </div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-    </div>
-</div><br>
+</div>
+<button class="btn btn-primary" id="next-btn">Next</button>
+<script>
+    const items = document.querySelector('.carousel-items');
+    const nextBtn = document.querySelector('#next-btn');
+
+    let currentItem = 0;
+
+    nextBtn.addEventListener('click', () => {
+      currentItem++;
+      if (currentItem >= items.children.length) {
+        currentItem = 0;
+      }
+      items.style.transform = `translateX(-${currentItem * 33.33333}%)`;
+
+      const prevDesc = document.querySelector('.description.show');
+      const currentDesc = items.children[currentItem].querySelector('.description');
+      prevDesc.classList.remove('show');
+      currentDesc.classList.add('show');
+    });
+  </script>
+</body>

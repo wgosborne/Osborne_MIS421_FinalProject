@@ -18,6 +18,7 @@ namespace _521Final.Controllers
         {
             return View();
         }
+        
 
         public IActionResult Privacy()
         {

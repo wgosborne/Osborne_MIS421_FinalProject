@@ -6,6 +6,16 @@ namespace _521Final.Models
     {
         public int UserBookId { get; set; }
 
+        //I think we should add these
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public double? UserRating { get; set; }
+
+        public string? UserReview { get; set; }
+
         [ForeignKey("User")]
         public int? UserId { get; set; }
         public User? User { get; set; }

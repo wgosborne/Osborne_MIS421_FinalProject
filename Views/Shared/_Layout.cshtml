@@ -9,10 +9,12 @@
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/osborne_assignment3.styles.css" asp-append-version="true" />*@
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="~/css/site.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://media.istockphoto.com/id/850219738/vector/pixel-book-pixel-art-cartoon-retro-game-style.jpg?s=170667a&w=0&k=20&c=OMRrA9MMiNIooFzzDIRlMvEdMZZIi8JxvXCN4bm4U9o=" />
   <style>
     /* Remove the navbar's default rounded borders and increase the bottom margin */ 
     .navbar {
@@ -27,17 +29,19 @@
    
     /* Add a gray background color and some padding to the footer */
     footer {
-      background-color: #f2f2f2;
+      background-color: saddlebrown;
       padding: 25px;
     }
   </style>
 </head>
 <body>
+ 
 
+    
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Book Match</h1>      
-    <p>Find your perfect match</p>
+    <h3>Find your perfect match</h3>
   </div>
 </div>
 
@@ -61,9 +65,9 @@
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">My Books</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Add Books</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Add Genres</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Chat Gpt</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a></li>
+        <li><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Add Users</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
@@ -79,14 +83,16 @@
     <hr />
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>  
-  <form class="form-inline">Get deals:
-    <input type="email" class="form-control" size="50" placeholder="Email Address">
-    <button type="button" class="btn btn-danger">Sign Up</button>
-  </form>
-        
-</footer>
+    <footer class="container-fluid text-center">
+        <p>Online Store Copyright</p>
+        <form class="form-inline">
+            Get deals:
+            <input type="email" class="form-control" size="50" placeholder="Email Address">
+            <button type="button" class="btn btn-danger">Sign Up</button>
+        </form>
+
+    </footer>
     
 </body>
+
 </html>

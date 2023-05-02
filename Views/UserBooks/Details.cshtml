@@ -3,14 +3,34 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<div class="container text-center">
 <h1>Details</h1>
+</div>
+<div class="box">
+    <div class="container" id="" style="">
+        <div class="row">
+            <div class="col-sm-11">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"></div>
+                    <div class="">
+                        <label for="Label"></label>
+                        <br />
+                        @Html.DisplayNameFor(model => model.Book.Title):
 
-<div>
-    <h4>UserBook</h4>
-    <hr />
-    <dl class="row">
-    </dl>
+                        @Html.DisplayFor(model => model.Book.Title)
+
+                        <br />
+
+                        @Html.DisplayNameFor(model => model.Book.Author)
+
+                        @Html.DisplayFor(model => model.Book.Author)
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div><br>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.UserBookId">Edit</a> |

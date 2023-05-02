@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Final.Data;
+using _521Final.Models;
 
 namespace _521Final.Controllers
 {
@@ -19,7 +20,7 @@ namespace _521Final.Controllers
         }
 
         //Adding the book photo
-        public async Task<IActionResult> GetBookPhoto(int id)
+        /*public async Task<IActionResult> GetBookPhoto(int id)
         {
             var books = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);
             if (books == null)
@@ -28,7 +29,7 @@ namespace _521Final.Controllers
             }
             var imageData = books.BookPhoto;
             return File(imageData, "image/jpg");
-        }
+        }*/
 
         // GET: Books
         public async Task<IActionResult> Index()
@@ -38,6 +39,9 @@ namespace _521Final.Controllers
             return _context.Book != null ?
                         View(await _context.Book.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Book'  is null.");
+
+            //var applicationDbContext = _context.GenreBook.Include(m => m.Book).Include(m => m.Genre);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Books/Details/5
@@ -66,6 +70,10 @@ namespace _521Final.Controllers
         {
             // added the line below, may need to delete
             //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id");
+            //ViewData["GenreID"] = new SelectList(_context.Genre, "Id", "Id");
+            ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name");
+            var genre = _context.Genre.Where(g => g.Name == ViewData["Genre"]);
+            ViewData["GenreID"] = genre;
             return View();
         }
 
@@ -74,24 +82,35 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HyperLink,StartDate,EndDate,userRating,Title,Author,AvgRating,Genre,MyReview")] Book book, IFormFile BookPhoto)
+        public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
             {
                 if (BookPhoto != null && BookPhoto.Length > 0)
                 {
-                    var memoryStream = new MemoryStream();
-                    await BookPhoto.CopyToAsync(memoryStream);
-                    book.BookPhoto = memoryStream.ToArray();
+                   var memoryStream = new MemoryStream();
+                   await BookPhoto.CopyToAsync(memoryStream);
+                   book.BookPhoto = memoryStream.ToArray();
                 }
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Title", book.GenreId);
+            //ViewData["GenreID"] = new SelectList(_context.Genre, "Id", "Id", book.GenreId);
+            ViewData["Genre"] = new SelectList(_context.Genre, "Name", "Name", book.Genre);
             return View(book);
         }
 
+        public async Task<IActionResult> GetBookPhoto(int Id)
+        {
+            var books = await _context.Book.FirstOrDefaultAsync(m => m.Id == Id);
+            if (books == null)
+            {
+                return NotFound();
+            }
+            var imageData = books.BookPhoto;
+            return File(imageData, "image/jpg");
+        }
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -113,8 +132,8 @@ namespace _521Final.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,StartDate,EndDate,userRating,Title,Author,AvgRating,Genre,MyReview")] Book book)
+        
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,BookPhoto")] Book book)
         {
             if (id != book.Id)
             {
@@ -166,7 +185,7 @@ namespace _521Final.Controllers
 
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+      
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Book == null)

@@ -24,7 +24,12 @@ namespace _521Final.Controllers
         {
             //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
             //return View(await applicationDbContext.ToListAsync()); change this for UserBook later
-            return View();
+            //return _context.UserBook != null ?
+            //            View(await _context.UserBook.ToListAsync()) :
+            //            Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
+            //return View();
+            var applicationDbContext = _context.UserBook.Include(m => m.Book).Include(m => m.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: UserBooks/Details/5
@@ -48,6 +53,8 @@ namespace _521Final.Controllers
         // GET: UserBooks/Create
         public IActionResult Create()
         {
+            ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title");
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName");
             return View();
         }
 
@@ -56,7 +63,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] UserBook userBook)
+        public async Task<IActionResult> Create([Bind("Id, StartDate, EndDate, UserRating, UserReview, UserId, BookId")] UserBook userBook)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +71,8 @@ namespace _521Final.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.UserId);
             return View(userBook);
         }
 
@@ -88,7 +97,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] UserBook userBook)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, StartDate, EndDate, UserRating, UserReview")] UserBook userBook)
         {
             if (id != userBook.UserBookId)
             {

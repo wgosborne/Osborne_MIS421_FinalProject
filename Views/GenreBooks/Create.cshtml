@@ -4,15 +4,27 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Give The Book A Genre</h1>
 
-<h4>GenreBook</h4>
+<h4>This should probs be an admin only feature</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <div class="form-group">
+                <label asp-for="BookId" class="control-label">Book</label>
+                <select asp-for="BookId" class ="form-control" asp-items="ViewBag.BookID"></select>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                <label asp-for="GenreId" class="control-label">Book</label>
+                <select asp-for="GenreId" class ="form-control" asp-items="ViewBag.GenreID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
