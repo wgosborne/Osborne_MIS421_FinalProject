@@ -16,9 +16,9 @@ namespace _521Final.Models
 
         public string? UserReview { get; set; }
 
-        [ForeignKey("User")]
-        public int? UserId { get; set; }
-        public User? User { get; set; }
+        [ForeignKey("ApplicationUser")]
+        //public int? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
         [ForeignKey("Book")]
         public int? BookId { get; set; }
