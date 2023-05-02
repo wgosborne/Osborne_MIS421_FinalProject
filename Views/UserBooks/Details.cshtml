@@ -14,17 +14,76 @@
                     <div class="panel-heading"></div>
                     <div class="">
                         <label for="Label"></label>
-                        <br />
-                        @Html.DisplayNameFor(model => model.Book.Title):
+                                @Html.DisplayNameFor(model => model.Book.Title):
+                      
+                                @Html.DisplayFor(model => model.Book.Title)
 
-                        @Html.DisplayFor(model => model.Book.Title)
+                                <br />
+                        
+                                @Html.DisplayNameFor(model => model.Book.Author):
+                     
+                                @Html.DisplayFor(model => model.Book.Author)
 
-                        <br />
+                                @*<br />*@
+                                
+                        
+                                @*@if (@Html.DisplayFor(model => model.Book.BookPhoto) != null)
+                                {
+                                    <img width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {(this.model.Book.BookPhoto)})" /> cant get the right syntax for the photo
+                                }*@
 
-                        @Html.DisplayNameFor(model => model.Book.Author)
+                                <br />
 
-                        @Html.DisplayFor(model => model.Book.Author)
+                                My Rating:
+                        
+                                @Html.DisplayFor(model => model.UserRating)
 
+                                <br />
+                        
+                                Average Rating:
+                        
+                                @Html.DisplayFor(model => model.Book.AvgRating)
+
+                                <br />
+                      
+                                @Html.DisplayNameFor(model => model.Book.Genre):
+                        
+                                @Html.DisplayFor(model => model.Book.Genre)
+                        
+
+                                <br />
+
+                                Started Reading On:
+                        
+                                @Html.DisplayFor(model => model.StartDate)
+
+                                <br />
+
+                                Finished Reading On:
+                        
+                                @Html.DisplayFor(model => model.EndDate)
+
+                                <br />
+
+                                My Review:
+                        
+                                @Html.DisplayFor(model => model.UserReview)
+
+                                <br />
+                        
+                                @Html.DisplayNameFor(model => model.Book.Summary):
+                        
+                                @Html.DisplayFor(model => model.Book.Summary)
+
+                                <br />
+
+                                Link:
+                               
+
+                                @Html.DisplayFor(model => model.Book.HyperLink)
+
+                                <br />
+                        
                     </div>
 
                 </div>
@@ -36,3 +95,4 @@
     <a asp-action="Edit" asp-route-id="@Model?.UserBookId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+

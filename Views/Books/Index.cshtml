@@ -50,12 +50,14 @@
 
 <body>
     <div class="container text-center">
-    <h1>Summary and Create Book/Home Page</h1>
+    <h1>All Books</h1>
     </div>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+<button class="btn">
+
+    <a asp-action="Create">Create New</a>
+
+</button>
     @*  <table class="table">
     <thead>
     <tr>
@@ -129,7 +131,7 @@
     </tbody>
     </table>*@
 
-    <div class="box">
+<div class="box" style = "margin-top: 15px;">
 
 @foreach (var item in Model) { //not working bc we can't create books yet
     <div class="Container" id="" style="">

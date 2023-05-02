@@ -48,15 +48,18 @@
 
 
 <body>
-    <div class="container text-center">
+
+<div class="container text-center">
 <h1>My Books</h1>
 </div>
 @*referencing My Books and their recommended books*@
 
 
-<p>
+<button class="btn">
+
     <a asp-action="Create">Create New</a>
-</p>
+
+</button>
 
 @*<table class="table">
     <thead>
@@ -78,7 +81,7 @@
 </table>*@
 
 
-    <div class="carousel-container">
+    <div class="carousel-container" style = "margin-top: 15px;">
         <div class="carousel-items">
         @foreach (var item in Model) {
             <div class="carousel-item">

@@ -4,9 +4,15 @@
     ViewData["Title"] = "Edit"; //editing UserBooks
 }
 
-<h1>Edit</h1>
+<head>
 
-<h4>UserBook</h4>
+</head>
+
+<body>
+<div class="container text-center">
+<h1>Edit @Html.DisplayFor(model => model.Book.Title)</h1> @*trying to get the name of the book to pop up next to the word edit*@
+</div>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,6 +49,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+</body>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
