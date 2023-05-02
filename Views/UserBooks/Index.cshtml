@@ -48,15 +48,18 @@
 
 
 <body>
-    <div class="container text-center">
+
+<div class="container text-center">
 <h1>My Books</h1>
 </div>
 @*referencing My Books and their recommended books*@
 
 
-<p>
+<button class="btn">
+
     <a asp-action="Create">Create New</a>
-</p>
+
+</button>
 
 @*<table class="table">
     <thead>
@@ -78,11 +81,17 @@
 </table>*@
 
 
-    <div class="carousel-container">
+    <div class="carousel-container" style = "margin-top: 15px;">
         <div class="carousel-items">
         @foreach (var item in Model) {
             <div class="carousel-item">
-                 <img src="@Html.DisplayFor(modelItem => item.Book.BookPhoto)" alt="@Html.DisplayFor(modelItem => item.Book.BookPhoto)"> @*just displays empty box rn*@
+                 @*<img src="@Html.DisplayFor(modelItem => item.Book.BookPhoto)" alt="@Html.DisplayFor(modelItem => item.Book.BookPhoto)">*@
+                 <span id="">
+                    @if (item.Book.BookPhoto != null)
+                    {
+                        <img style= "object-fit: contain;" width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {item.Book.Id})" />
+                    }
+                </span>@*just displays empty box rn*@
                  <p class="description">
                      @Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)
                      <br>My Review: @Html.DisplayFor(modelItem => item.UserReview)

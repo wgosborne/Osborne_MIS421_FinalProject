@@ -1,11 +1,12 @@
 ﻿@model Book
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create"; //for adding books
 }
 <head>
     <script src="~/js/ChatGpt.js"></script>
 </head>
+
 <body>
 
 <h1>Create</h1>
@@ -74,11 +75,6 @@
                 <input asp-for="MyReview" class="form-control" />
                 <span asp-validation-for="MyReview" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <label asp-for="BookPhoto" class="control-label"></label>
-                <input type="file" id="BookPhoto" name="BookPhoto" class="form-control" />
-                <span asp-validation-for="BookPhoto" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <input type="file" id="BookPhoto" name="BookPhoto" class="form-control" />
                 <span asp-validation-for="BookPhoto" class="text-danger"></span>
