@@ -37,39 +37,36 @@
   </style>
 </head>
 <body>
- 
-
-<div class="jumbotron">
-  <div class="container text-center">
-    <h1>Book Match</h1>      
-    <h3>Find your perfect match</h3>
-  </div>
-</div>
-
-@*we can put this in the header if we want it at the actual top*@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#">Logo</a>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>Book Match</h1>      
+            <h3>Find your perfect match</h3>
+        </div>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
-        </li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">My Books</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Add Users</a></li>
+@*we can put this in the header if we want it at the actual top*@
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+        <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
+                </li>
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">My Books</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Add Users</a></li>
         
-      </ul>
+            </ul>
      @* <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
       </ul>*@
