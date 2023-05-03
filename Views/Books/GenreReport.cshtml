@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Book>
+
+<h2>Genre Collection Report</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Genre</th>
+            <th>Number of Books</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model.GroupBy(b => b.Genre)
+        .Select(g => new { Genre = g.Key, Count = g.Count() })
+        .OrderBy(g => g.Genre))
+        {
+            <tr>
+                <td>@genre.Genre</td>
+                <td>@genre.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<table>
+    <thead>
+        <tr>
+            <th>Genre</th>
+            <th>How Many Books are in Each Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model.GroupBy(b => b.Genre)
+        .Select(g => new { Genre = g.Key, Count = g.Count() })
+        .OrderBy(g => g.Genre))
+        {
+            <tr>
+                <td>@genre.Genre</td>
+                <td>@genre.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
+*@

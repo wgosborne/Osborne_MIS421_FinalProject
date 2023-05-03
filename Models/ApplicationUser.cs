@@ -12,10 +12,7 @@ namespace _521Final.Models
 
         [Required]
         public string? Name { get; set;}
-
-        public List<UserBook> UserBooks = new List<UserBook>();
-        //{ get; set;}
-
+        public string Role { get; set; }
 
 }
 }

@@ -1,12 +1,13 @@
 ﻿@model Book
 
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container text-center">
-<h1>Details</h1>
+<h2>Details</h2>
 </div>
 
     <dl class="row">
@@ -79,6 +80,11 @@
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <br /><hr />
+   <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+
+
