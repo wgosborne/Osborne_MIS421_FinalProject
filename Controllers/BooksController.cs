@@ -53,7 +53,7 @@ namespace _521Final.Controllers
 
             // Group the books by genre and count the number of books in each genre
             var genreCounts = books.GroupBy(b => b.Genre)
-                                   .Select(g => new { Genre = g.Key, Count = g.Count() })
+                                   .Select(g => new { Genre = g.Key, Count = g.Count(), AvgRating = g.Average(b => b.AvgRating) })
                                    .ToList();
 
             // Output the genre report to the console
@@ -66,6 +66,18 @@ namespace _521Final.Controllers
             // Return the list of books grouped by genre
             return books;
         }
+
+        public IActionResult TopRated()
+        {
+            var topBooks = _context.Book
+                .OrderByDescending(b => b.AvgRating)
+                .Take(10)
+                .ToList();
+
+            return View("TopRated", topBooks);
+        }
+
+
 
         public async Task<IActionResult> Index()
         {
