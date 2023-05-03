@@ -16,50 +16,52 @@
                         <div class="">
                             <label for="Label"></label>
 
-                            @Html.DisplayNameFor(model => model.HyperLink):
+                            <strong> @Html.DisplayNameFor(model => model.HyperLink):</strong>
 
 
                             @Html.DisplayFor(model => model.HyperLink)
 
-                            <br />
+                            <br /><br />
 
-                            @Html.DisplayNameFor(model => model.Title):
+                            <strong> @Html.DisplayNameFor(model => model.Title):</strong>
 
                             @Html.DisplayFor(model => model.Title)
-
+                            <br />
                             <br />
 
-                            @Html.DisplayNameFor(model => model.Author):
+                            <strong> @Html.DisplayNameFor(model => model.Author):</strong>
 
                             @Html.DisplayFor(model => model.Author)
 
                             <br />
+                            <br />
 
-                            @Html.DisplayNameFor(model => model.AvgRating):
+                            <strong>@Html.DisplayNameFor(model => model.AvgRating):</strong>
 
                             @Html.DisplayFor(model => model.AvgRating)
 
                             <br />
+                            <br />
 
-                            @Html.DisplayNameFor(model => model.Genre):
+                            <strong>  @Html.DisplayNameFor(model => model.Genre):</strong>
 
                             @Html.DisplayFor(model => model.Genre)
 
                             <br />
+                            <br />
 
-                            @Html.DisplayNameFor(model => model.Summary):
+                            <strong> @Html.DisplayNameFor(model => model.Summary):</strong>
 
                             @Html.DisplayFor(model => model.Summary)
 
                             <br />
+                            <br />
 
-
-                            <span id="">
-                                @if (@Model.BookPhoto != null)
-                                {
-                                <img style= "object-fit: contain;" width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {@Model.Id})" />
-                                }
-                            </span>
+                            <strong> @Html.DisplayNameFor(model => model.BookPhoto):</strong>
+                            @if (Model.BookPhoto != null)
+                            {
+                                <img style="object-fit: contain;" width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {Model.Id})" />
+                            }
 
                         </div>
 
