@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Book>
+
+<h1>Top Rated Books</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genres</th>
+                <th>Average Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@string.Join(", ", book.Genre)</td>
+                    <td>@(book.AvgRating.HasValue ? book.AvgRating.Value.ToString("0.##") : "")</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

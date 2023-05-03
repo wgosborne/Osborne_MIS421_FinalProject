@@ -8,25 +8,85 @@
 
 <h2>Genre Collection Report</h2>
 
-<table class="table">
+
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Genre</th>
             <th>Number of Books</th>
+            <th>Average Rating</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var genre in Model.GroupBy(b => b.Genre)
-        .Select(g => new { Genre = g.Key, Count = g.Count() })
+        .Select(g => new
+        {
+           Genre = g.Key,
+           Count = g.Count(),
+           AvgRating = g.Average(b => b.AvgRating)
+        })
         .OrderBy(g => g.Genre))
         {
             <tr>
                 <td>@genre.Genre</td>
                 <td>@genre.Count</td>
+                <td>@string.Format("{0:0.00}", genre.AvgRating)</td>
             </tr>
         }
     </tbody>
 </table>
+
+
+@*<table>
+    <thead>
+        <tr>
+            <th>Genre</th>
+            <th>Number of Books</th>
+            <th>Average Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model.GroupBy(b => b.Genre)
+        .Select(g => new
+        {
+           Genre = g.Key,
+           Count = g.Count(),
+           AvgRating = g.Average(b => b.AvgRating)
+        })
+        .OrderBy(g => g.Genre))
+        {
+            <tr>
+                <td>@genre.Genre</td>
+                <td>@genre.Count</td>
+                <td>@genre.AvgRating</td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>Genre</th>
+            <th>Number of Books</th>
+            <th>Average Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model.GroupBy(b => b.Genre)
+        .Select(g => new { Genre = g.Key, Count = g.Count(), AvgRating = b => b.AvgRating })
+        .OrderBy(g => g.Genre))
+        {
+            <tr>
+                <td>@genre.Genre</td>
+                <td>@genre.Count</td>
+                <td>@genre.AvgRating</td>
+            </tr>
+        }
+    </tbody>
+</table>*@
 
 @*<table>
     <thead>
