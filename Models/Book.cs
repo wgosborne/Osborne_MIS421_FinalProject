@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using _521Final.Models;
 using System;
 
 public class Book //will get filled in with Azure Books data, we can fill these fields w what they give us
@@ -32,9 +33,11 @@ public class Book //will get filled in with Azure Books data, we can fill these 
     [ForeignKey("Genre")]
     public int? GenreId { get; set; }
 
+	public ICollection<UserBook> UserBooks { get; set; }
 
-    /*public List<Book> SimilarBooks { get; set; }*/
-    public Book()
+
+	/*public List<Book> SimilarBooks { get; set; }*/
+	public Book()
 	{
 		//this.Summary = 
 	}

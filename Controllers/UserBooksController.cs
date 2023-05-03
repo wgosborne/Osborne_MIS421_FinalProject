@@ -8,16 +8,49 @@ using Microsoft.EntityFrameworkCore;
 using _521Final.Data;
 using _521Final.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+
+
 
 namespace _521Final.Controllers
 {
+    [Authorize]
     public class UserBooksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UserBooksController(ApplicationDbContext context)
+
+        //private ApplicationUser User;
+
+        public UserBooksController(UserManager<IdentityUser> userManager, ApplicationDbContext dbContext) //, ApplicationUser User
         {
-            _context = context;
+            _userManager = userManager;
+            _context = dbContext; 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddToUserAccount(int bookId)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Create a new UserBook object
+            UserBook userBook = new UserBook
+            {
+                UserId = userId,
+                BookId = bookId
+            };
+
+
+
+            // Add the UserBook to the database
+            _context.UserBook.Add(userBook);
+            await _context.SaveChangesAsync();
+
+
+
+            return RedirectToAction("Index", "Books");
         }
 
         [Authorize("User")]
@@ -29,9 +62,34 @@ namespace _521Final.Controllers
             //            View(await _context.UserBook.ToListAsync()) :
             //            Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
             //return View();
-            var applicationDbContext = _context.UserBook.Include(m => m.Book).Include(m => m.User);
-            return View(await applicationDbContext.ToListAsync());
+            //var applicationDbContext = _context.UserBook.Include(m => m.Book).Include(m => m.UserId);
+            //return View(await applicationDbContext.ToListAsync());
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+
+
+            var userBooks = await _context.UserBook.Include(b => b.Book).Where(ub => ub.UserId == user.Id).ToListAsync();
+            return View(userBooks);
         }
+
+        //public async Task<IActionResult> Index(ApplicationUser User)
+        //{
+        //    //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
+        //    //return View(await applicationDbContext.ToListAsync()); change this for UserBook later
+        //    //return _context.UserBook != null ?
+        //    //            View(await _context.UserBook.ToListAsync()) :
+        //    //            Problem("Entity set 'ApplicationDbContext.UserBook'  is null.");
+        //    //return View();
+        //    //var applicationDbContext = _context.UserBook.Include(m => m.Book).Include(m => m.User);
+
+        //    var applicationDbContext = User.UserBooks;
+        //    return View(applicationDbContext);
+        //}
 
         // GET: UserBooks/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,9 +112,27 @@ namespace _521Final.Controllers
         // GET: UserBooks/Create
         public IActionResult Create()
         {
+
+            // Get the current user
+            var user = _userManager.GetUserAsync(User).Result;
+
+            //var book = _context.Book.Find(bookId);
+
+            // Create a new UserBook object
+            var userBook = new UserBook { UserId = user.Id};
+
             ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title");
-            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName");
-            return View();
+            //ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName");
+
+            // Add the UserBook object to the context and save changes
+            _context.UserBook.Add(userBook);
+            _context.SaveChanges();
+
+
+
+            // Redirect back to the Books index page
+            return RedirectToAction("Index");
+
         }
 
         // POST: UserBooks/Create
@@ -64,23 +140,33 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, StartDate, EndDate, UserRating, UserReview, UserId, BookId")] UserBook userBook)
+        public async Task<IActionResult> Create([Bind("Id, StartDate, EndDate, UserRating, UserReview, UserId, BookId")] UserBook userBook, int Id)
         {
             if (ModelState.IsValid)
             {
+                var user = await _userManager.GetUserAsync(User);
+                //.FirstOrDefaultAsync(m => m.Id == Id)
+                
+                if (user == null)
+                {
+                    return NotFound();
+                };
+
+                userBook.UserId = user.Id;
                 _context.Add(userBook);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
-            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.User.Id);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.UserId);
             return View(userBook);
         }
 
         // GET: UserBooks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.UserBook == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -90,6 +176,15 @@ namespace _521Final.Controllers
             {
                 return NotFound();
             }
+            //return View(userBook);
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || userBook.UserId != user.Id)
+            {
+                return NotFound();
+            }
+
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
             return View(userBook);
         }
 
@@ -125,6 +220,7 @@ namespace _521Final.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
             return View(userBook);
         }
 

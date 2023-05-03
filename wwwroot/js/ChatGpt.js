@@ -32,3 +32,4 @@ function getSummaryResponse() {
         })
         .catch(error => console.error(error));
 };
+

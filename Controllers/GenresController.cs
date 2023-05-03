@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Final.Data;
 using _521Final.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace _521Final.Controllers
 {
@@ -46,6 +48,8 @@ namespace _521Final.Controllers
         }
 
         // GET: Genres/Create
+
+        [Authorize("Admin")]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +72,8 @@ namespace _521Final.Controllers
         }
 
         // GET: Genres/Edit/5
+
+        [Authorize("Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Genre == null)
@@ -88,6 +94,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Genre genre)
         {
             if (id != genre.Id)
@@ -119,6 +126,7 @@ namespace _521Final.Controllers
         }
 
         // GET: Genres/Delete/5
+        [Authorize("Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Genre == null)

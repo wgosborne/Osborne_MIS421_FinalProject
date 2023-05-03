@@ -67,7 +67,7 @@ namespace _521Final.Controllers
         }
 
         // GET: Books/Create
-        [Authorize("User")]
+        [Authorize("Admin")]
         public IActionResult Create()
         {
             // added the line below, may need to delete
