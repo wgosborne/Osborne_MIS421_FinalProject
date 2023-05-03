@@ -2,6 +2,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +65,7 @@
             <a class="nav-link dropdown-toggle text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
         </li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">My Books</a></li>
-        <li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>
+        @*<li><a class="nav-link text-dark" asp-area="" asp-controller="UserBooks" asp-action="Index">Reccommendations</a></li>*@
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a></li>
         <li><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Add Users</a></li>
@@ -85,9 +86,9 @@
 </div>
 
     <footer class="container-fluid text-center">
-        <p>Online Store Copyright</p>
+        <p>Book Match Mailing List</p>
         <form class="form-inline">
-            Get deals:
+            Get notified when a new Best-Seller hits Book Match:
             <input type="email" class="form-control" size="50" placeholder="Email Address">
             <button type="button" class="btn btn-danger">Sign Up</button>
         </form>
