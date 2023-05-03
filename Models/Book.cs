@@ -1,18 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 public class Book //will get filled in with Azure Books data, we can fill these fields w what they give us
 {
 	public int Id { get; set; }
 	[Url]
+
 	public string? HyperLink { get; set; } //Link to the book on the site, so they can click on it
 	//public DateTime? StartDate { get; set; }
 
 	//public DateTime? EndDate { get; set; }
 
 	//public double? userRating { get; set; }
-
 	public string? Title { get; set; }
 
 	public string? Author { get; set; }
@@ -38,4 +39,5 @@ public class Book //will get filled in with Azure Books data, we can fill these 
 	{
 		//this.Summary = 
 	}
+
 }

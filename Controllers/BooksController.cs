@@ -33,6 +33,40 @@ namespace _521Final.Controllers
         }*/
 
         // GET: Books
+        //Make the GenreReport 
+       
+
+
+        public IActionResult GenreReport()
+        {
+            // Call the GetBooksByGenre method to generate the report and retrieve the list of books
+            List<Book> books = GetBooksByGenre();
+
+            // Render the report view and pass the list of books as a model
+            return View("GenreReport", books);
+        }
+
+        private List<Book> GetBooksByGenre()
+        {
+            // Implementation of the GetBooksByGenre method goes here..
+            List<Book> books = _context.Book.ToList();
+
+            // Group the books by genre and count the number of books in each genre
+            var genreCounts = books.GroupBy(b => b.Genre)
+                                   .Select(g => new { Genre = g.Key, Count = g.Count() })
+                                   .ToList();
+
+            // Output the genre report to the console
+            Console.WriteLine("Book Genre Report:");
+            foreach (var gc in genreCounts)
+            {
+                Console.WriteLine($"{gc.Genre}: {gc.Count}");
+            }
+
+            // Return the list of books grouped by genre
+            return books;
+        }
+
         public async Task<IActionResult> Index()
         {
             /*var applicationDbContext = _context.Book.Include(a => a.Genre);
