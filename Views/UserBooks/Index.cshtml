@@ -10,6 +10,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
     var user = await UserManager.GetUserAsync(User);
     var userBooks = Model.Where(ub => ub.UserId == user.Id);
+    var userName = (@User.Identity.Name).Split('@').First();
 }
 @*<script type="text/javascript" src="js\MyBooks.js""></script>*@
 <head>
@@ -57,7 +58,7 @@
 <body>
 
 <div class="container text-center">
-<h2>@User.Identity.Name 's Books</h2>
+<h2> @userName's Books</h2>
 </div>
 @*referencing My Books and their recommended books*@
 
@@ -110,7 +111,7 @@
                      @Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)
                      <br>My Review: @Html.DisplayFor(modelItem => item.UserReview)
                      <br>My Rating: @Html.DisplayFor(modelItem => item.UserRating)
-                     <br>Book ID: @Html.DisplayFor(modelItem => item.BookId)
+                     @*<br>Book ID: @Html.DisplayFor(modelItem => item.BookId)*@
                      <br><a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |<a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |<a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
                      </p> 
             </div>
