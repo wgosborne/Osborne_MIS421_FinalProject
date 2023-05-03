@@ -10,6 +10,8 @@ namespace _521Final.Models
     {
         //prop from AspNetUsers in database you want
 
+        public ICollection<UserBook> userBooks { get; set; }
+
         [Required]
         public string? Name { get; set;}
         public string Role { get; set; }

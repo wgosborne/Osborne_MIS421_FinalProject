@@ -18,6 +18,7 @@ namespace _521Final.Models
 
         [ForeignKey("IdentityUser")]
         public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
         [ForeignKey("Book")]
         [Column("Id")]

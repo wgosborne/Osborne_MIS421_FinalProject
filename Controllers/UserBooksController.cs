@@ -30,30 +30,30 @@ namespace _521Final.Controllers
             _context = dbContext; 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddToUserAccount(int bookId)
-        {
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //[HttpGet]
+        //public async Task<IActionResult> AddToUserAccount(int bookId)
+        //{
+        //    string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // Create a new UserBook object
-            UserBook userBook = new UserBook
-            {
-                UserId = userId,
-                BookId = bookId
-            };
-
-
-
-            // Add the UserBook to the database
-            _context.UserBook.Add(userBook);
-            await _context.SaveChangesAsync();
+        //    // Create a new UserBook object
+        //    UserBook userBook = new UserBook
+        //    {
+        //        UserId = userId,
+        //        BookId = bookId
+        //    };
 
 
 
-            return RedirectToAction("Index", "Books");
-        }
+        //    // Add the UserBook to the database
+        //    _context.UserBook.Add(userBook);
+        //    await _context.SaveChangesAsync();
 
-        [Authorize("User")]
+
+
+        //    return RedirectToAction("Index", "Books");
+        //}
+
+        //decide who needs to be authorized here I TOOK THIS OUT
         public async Task<IActionResult> Index()
         {
             //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later
@@ -99,8 +99,18 @@ namespace _521Final.Controllers
                 return NotFound();
             }
 
+            var currUser = await _userManager.GetUserAsync(User);
+
             var userBook = await _context.UserBook
-                .FirstOrDefaultAsync(m => m.UserBookId == id);
+                .Include(ub => ub.User)
+                .Include(ub => ub.Book)
+                .FirstOrDefaultAsync(ub => ub.UserId == currUser.Id && ub.UserBookId == id); //(ub => ub.UserBookId == id);
+
+            //var movieActor = await _context.MovieActor
+            //   .Include(m => m.Actor)
+            //   .Include(m => m.Movie)
+            //   .FirstOrDefaultAsync(m => m.Id == id);
+
             if (userBook == null)
             {
                 return NotFound();
@@ -122,16 +132,19 @@ namespace _521Final.Controllers
             var userBook = new UserBook { UserId = user.Id};
 
             ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title");
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName");
             //ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName");
 
             // Add the UserBook object to the context and save changes
-            _context.UserBook.Add(userBook);
-            _context.SaveChanges();
+            //_context.UserBook.Add(userBook);
+            //_context.SaveChanges();
 
 
 
             // Redirect back to the Books index page
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+
+            return View(userBook);
 
         }
 
@@ -144,15 +157,22 @@ namespace _521Final.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Just commented this out
+
                 var user = await _userManager.GetUserAsync(User);
-                //.FirstOrDefaultAsync(m => m.Id == Id)
+
+
+
+                        //.FirstOrDefaultAsync(m => m.Id == Id)
                 
-                if (user == null)
-                {
-                    return NotFound();
-                };
+                //if (user == null)
+                //{
+                //    return NotFound();
+                //};
 
                 userBook.UserId = user.Id;
+                //ViewData["BookID"] = new SelectList(_context.Book, "Id", "Title", userBook.BookId);
+                //ViewData["UserID"] = new SelectList(_context.User, "Id", "FirstName", userBook.UserId);
                 _context.Add(userBook);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

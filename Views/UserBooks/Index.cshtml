@@ -1,9 +1,15 @@
-﻿@model IEnumerable<_521Final.Models.UserBook>
-@*@model IEnumerable<_521Final.Models.ApplicationUser>
-*@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<_521Final.Models.UserBook>
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = "Index"; //UserBooks page
     Layout = "~/Views/Shared/_Layout.cshtml"; //add this to everything
+    var user = await UserManager.GetUserAsync(User);
+    var userBooks = Model.Where(ub => ub.UserId == user.Id);
 }
 @*<script type="text/javascript" src="js\MyBooks.js""></script>*@
 <head>
@@ -51,7 +57,7 @@
 <body>
 
 <div class="container text-center">
-<h2>My Books</h2>
+<h2>@User.Identity.Name 's Books</h2>
 </div>
 @*referencing My Books and their recommended books*@
 
@@ -81,14 +87,21 @@
     </tbody>
 </table>*@
 
-
+@if (userBooks.Any())
+{
     <div class="carousel-container" style = "margin-top: 15px;">
-        <div class="carousel-items">
-        @foreach (var item in Model) {
+        <div class="carousel-items" id="booksCarousel">
+            @*<ol class="carousel-indicators">
+                @foreach (var item in Model)
+                {
+                    <li data-target="#booksCarousel" data-slide-to="@Model.IndexOf(item)" @(Model.IndexOf(item) == 0 ? "class=active" : "")></li>
+                }
+            </ol>*@
+        @foreach (var item in userBooks) {
             <div class="carousel-item">
                  @*<img src="@Html.DisplayFor(modelItem => item.Book.BookPhoto)" alt="@Html.DisplayFor(modelItem => item.Book.BookPhoto)">*@
                  <span id="">
-                    @if (item.Book.BookPhoto != null)
+                    @if (item.Book?.BookPhoto != null)
                     {
                         <img style= "object-fit: contain;" width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {item.Book.Id})" />
                     }
@@ -97,6 +110,7 @@
                      @Html.DisplayFor(modelItem => item.Book.Title) by @Html.DisplayFor(modelItem => item.Book.Author)
                      <br>My Review: @Html.DisplayFor(modelItem => item.UserReview)
                      <br>My Rating: @Html.DisplayFor(modelItem => item.UserRating)
+                     <br>Book ID: @Html.DisplayFor(modelItem => item.BookId)
                      <br><a asp-action="Edit" asp-route-id="@item.UserBookId">Edit</a> |<a asp-action="Details" asp-route-id="@item.UserBookId">Details</a> |<a asp-action="Delete" asp-route-id="@item.UserBookId">Delete</a>
                      </p> 
             </div>
@@ -122,5 +136,10 @@
       prevDesc.classList.remove('show');
       currentDesc.classList.add('show');
     });
-  </script>
+        </script>
+    }
+    else
+    {
+        <h3>You haven't added any books to your collection yet! Click "Create New" to add one!</h3>
+    }
 </body>
