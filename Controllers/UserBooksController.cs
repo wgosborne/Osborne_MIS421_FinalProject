@@ -54,6 +54,8 @@ namespace _521Final.Controllers
         //}
 
         //decide who needs to be authorized here I TOOK THIS OUT
+
+        [Authorize("User")]
         public async Task<IActionResult> Index()
         {
             //var applicationDbContext = _context.MovieActor.Include(m => m.Actor).Include(m => m.Movie); we can rework this for book later

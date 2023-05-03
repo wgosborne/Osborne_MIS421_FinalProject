@@ -118,7 +118,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize("User")]
+        [Authorize("Admin")]
         public async Task<IActionResult> Create([Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (ModelState.IsValid)
