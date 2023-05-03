@@ -16,15 +16,15 @@ namespace _521Final.Models
 
         public string? UserReview { get; set; }
 
-        [ForeignKey("ApplicationUser")]
-        //public int? UserId { get; set; }
+        [ForeignKey("IdentityUser")]
+        public string? UserId { get; set; }
         public ApplicationUser? User { get; set; }
 
         [ForeignKey("Book")]
+        [Column("Id")]
         public int? BookId { get; set; }
         public Book? Book { get; set; }
 
-        // public List<Book> MyBooks { get; set; }
-        //public List<Book> WishList { get; set; } // or we can just do one called Shelf
+     
     }
 }
