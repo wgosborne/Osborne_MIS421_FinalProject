@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _521Final.Data;
 
@@ -11,9 +12,10 @@ using _521Final.Data;
 namespace _521Final.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230503150900_changedapplicationuserrolecolumn")]
+    partial class changedapplicationuserrolecolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,18 +87,17 @@ namespace _521Final.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserBookId"), 1L, 1);
 
+                    b.Property<string>("ApplicationUser")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("BookId")
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double?>("UserRating")
                         .HasColumnType("float");
@@ -106,9 +107,9 @@ namespace _521Final.Migrations
 
                     b.HasKey("UserBookId");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("ApplicationUser");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("BookId");
 
                     b.ToTable("UserBook");
                 });
@@ -398,7 +399,7 @@ namespace _521Final.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("Roles")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -422,13 +423,13 @@ namespace _521Final.Migrations
 
             modelBuilder.Entity("_521Final.Models.UserBook", b =>
                 {
-                    b.HasOne("Book", "Book")
-                        .WithMany("UserBooks")
-                        .HasForeignKey("BookId");
-
                     b.HasOne("_521Final.Models.ApplicationUser", "User")
-                        .WithMany("userBooks")
-                        .HasForeignKey("UserId");
+                        .WithMany()
+                        .HasForeignKey("ApplicationUser");
+
+                    b.HasOne("Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
 
                     b.Navigation("Book");
 
@@ -484,16 +485,6 @@ namespace _521Final.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Book", b =>
-                {
-                    b.Navigation("UserBooks");
-                });
-
-            modelBuilder.Entity("_521Final.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("userBooks");
                 });
 #pragma warning restore 612, 618
         }

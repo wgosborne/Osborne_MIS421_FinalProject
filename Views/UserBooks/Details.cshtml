@@ -1,7 +1,14 @@
-﻿@model _521Final.Models.UserBook
+﻿@using Microsoft.AspNetCore.Identity
+
+@model _521Final.Models.UserBook
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Details";
+    var user = await UserManager.GetUserAsync(User);
+    //var book = Model.Where(ub => ub.UserId == user.Id);
 }
 <div class="container text-center">
 <h2>Details</h2>

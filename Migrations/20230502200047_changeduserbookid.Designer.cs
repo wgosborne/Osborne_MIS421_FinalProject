@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _521Final.Data;
 
@@ -11,9 +12,10 @@ using _521Final.Data;
 namespace _521Final.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230502200047_changeduserbookid")]
+    partial class changeduserbookid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +98,7 @@ namespace _521Final.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("UserRating")
                         .HasColumnType("float");
@@ -107,8 +109,6 @@ namespace _521Final.Migrations
                     b.HasKey("UserBookId");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserBook");
                 });
@@ -398,10 +398,6 @@ namespace _521Final.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
@@ -423,16 +419,10 @@ namespace _521Final.Migrations
             modelBuilder.Entity("_521Final.Models.UserBook", b =>
                 {
                     b.HasOne("Book", "Book")
-                        .WithMany("UserBooks")
+                        .WithMany()
                         .HasForeignKey("BookId");
 
-                    b.HasOne("_521Final.Models.ApplicationUser", "User")
-                        .WithMany("userBooks")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Book");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -484,16 +474,6 @@ namespace _521Final.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Book", b =>
-                {
-                    b.Navigation("UserBooks");
-                });
-
-            modelBuilder.Entity("_521Final.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("userBooks");
                 });
 #pragma warning restore 612, 618
         }
