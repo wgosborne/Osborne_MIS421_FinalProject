@@ -54,10 +54,12 @@
                             <br />
 
 
-                            @if (Model.BookPhoto != null)
-                            {
-                                <img width="100" height="100" src="@Url.Action("GetBookPhoto", "BookPhoto", new {Model.BookPhoto})" />
-                            }
+                            <span id="">
+                                @if (@Model.BookPhoto != null)
+                                {
+                                <img style= "object-fit: contain;" width="100" height="100" src="@Url.Action("GetBookPhoto", "Books", new {@Model.Id})" />
+                                }
+                            </span>
 
                         </div>
 

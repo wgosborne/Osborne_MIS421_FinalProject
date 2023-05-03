@@ -150,7 +150,7 @@ namespace _521Final.Controllers
         }
         // GET: Books/Edit/5
 
-        [Authorize("User")]
+        [Authorize("Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Book == null)
@@ -175,7 +175,7 @@ namespace _521Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize("User")]
+        [Authorize("Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,HyperLink,Title,Author,AvgRating,Genre,Summary,GenreId")] Book book, IFormFile BookPhoto)
         {
             if (id != book.Id)
@@ -216,7 +216,7 @@ namespace _521Final.Controllers
         }
 
         // GET: Books/Delete/5
-        [Authorize("User")]
+        [Authorize("Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Book == null)
