@@ -7,7 +7,15 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<h3>@ViewData["Title"]</h3>
+<div class="container text-center">
+<h2>@ViewData["Title"]</h2>
+</div>
+<div class="box" style="margin-top: 15px;"></div>
+    <div class="container" id="" style=""></div>
+        <div class="row"></div>
+            @*<div class="col-sm-11">*@
+            <div class="panel panel-primary"></div>
+                <div class="panel-heading"></div>
 @{
     var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
     @if (consentFeature?.CanTrack ?? true)
@@ -64,6 +72,8 @@
             <p>You must accept the policy before you can enable two factor authentication.</p>
         </div>
     }
+   
+
 }
 
 @section Scripts {
