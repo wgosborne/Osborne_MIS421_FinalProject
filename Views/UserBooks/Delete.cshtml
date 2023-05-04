@@ -1,7 +1,13 @@
-﻿@model _521Final.Models.UserBook
+﻿@using Microsoft.AspNetCore.Identity
+
+@model _521Final.Models.UserBook
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Delete";
+    var user = await UserManager.GetUserAsync(User);
 }
 <div class="container text-center">
 <h2>Delete</h2>
@@ -21,7 +27,7 @@
 
                             <br />
 
-                            @Html.DisplayNameFor(model => model.Book.Author)
+                            @Html.DisplayNameFor(model => model.Book.Author):
 
                             @Html.DisplayFor(model => model.Book.Author)
 

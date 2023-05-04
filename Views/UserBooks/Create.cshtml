@@ -4,35 +4,35 @@
     ViewData["Title"] = "Create"; //adding the user specific details to userbook
 }
 <div class="container text-center">
-<h2>Create</h2>
+<h2>Add A Book to Your Shelf!</h2>
 </div>
-<h4>Adding a book to a user account</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BookId" class="control-label">Book</label>
+                <label asp-for="BookId" class="control-label">Book:</label>
                 <select asp-for="BookId" class ="form-control" asp-items="ViewBag.BookID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
+                <label asp-for="StartDate" class="control-label">Date Started:</label>
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
+                <label asp-for="EndDate" class="control-label">Date Finished:</label>
                 <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserRating" class="control-label"></label>
+                <label asp-for="UserRating" class="control-label">My Rating:</label>
                 <input asp-for="UserRating" class="form-control" />
                 <span asp-validation-for="UserRating" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserReview" class="control-label"></label>
+                <label asp-for="UserReview" class="control-label">My Review:</label>
                 <input asp-for="UserReview" class="form-control" />
                 <span asp-validation-for="UserReview" class="text-danger"></span>
             </div>

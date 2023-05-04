@@ -254,8 +254,12 @@ namespace _521Final.Controllers
                 return NotFound();
             }
 
+            var currUser = await _userManager.GetUserAsync(User);
+
             var userBook = await _context.UserBook
-                .FirstOrDefaultAsync(m => m.UserBookId == id);
+                .Include(ub => ub.User)
+                .Include(ub => ub.Book)
+                .FirstOrDefaultAsync(ub => ub.UserId == currUser.Id && ub.UserBookId == id); //(ub => ub.UserBookId == id);
             if (userBook == null)
             {
                 return NotFound();
