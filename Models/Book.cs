@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 public class Book //will get filled in with Azure Books data, we can fill these fields w what they give us
 {
 	public int Id { get; set; }
-	[Url]
 
+	[Url]
 	public string? HyperLink { get; set; } //Link to the book on the site, so they can click on it
 	//public DateTime? StartDate { get; set; }
 
